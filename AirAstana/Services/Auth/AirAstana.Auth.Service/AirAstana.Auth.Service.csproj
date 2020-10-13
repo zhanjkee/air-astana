@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AirAstana.Auth.Api.Models\AirAstana.Auth.Api.Models.csproj" />
+    <ProjectReference Include="..\AirAstana.Auth.Api\AirAstana.Auth.Api.csproj" />
+  </ItemGroup>
+
+</Project>
