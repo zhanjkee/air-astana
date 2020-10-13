@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AirAstana.Auth.Identity</name>
+    </assembly>
+    <members>
+        <member name="T:AirAstana.Auth.Identity.UserIdentity">
+            <summary>
+                Удостоверение пользователя.
+            </summary>
+        </member>
+        <member name="M:AirAstana.Auth.Identity.UserIdentity.#ctor(System.Int32,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+                Конструктор.
+            </summary>
+            <param name="id">ID пользователя.</param>
+            <param name="name">Логин пользователя.</param>
+            <param name="userName">Имя пользователя.</param>
+            <param name="zoneInfo">Часовой пояс пользователя.</param>
+            <param name="locale">Локаль пользователя.</param>
+            <param name="clientId">ID клиента.</param>
+            <param name="isAuthorized">Флаг, авторизован ли пользователь в системе.</param>
+            <param name="roles">Роли пользователя.</param>
+        </member>
+        <member name="M:AirAstana.Auth.Identity.UserIdentity.#ctor(System.Collections.Generic.IEnumerable{System.Security.Claims.Claim})">
+            <summary>
+                Конструктор.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Identity.UserIdentity.Id">
+            <summary>
+                ID пользователя.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Identity.UserIdentity.UserName">
+            <summary>
+                Логин пользователя.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Identity.UserIdentity.Name">
+            <summary>
+                Имя пользователя.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Identity.UserIdentity.ZoneInfo">
+            <summary>
+                Часовой пояс пользователя.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Identity.UserIdentity.Locale">
+            <summary>
+                Локаль пользователя.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Identity.UserIdentity.Culture">
+            <summary>
+                Культура пользователя.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Identity.UserIdentity.Expires">
+            <summary>
+                Срок действия удостоверения.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Identity.UserIdentity.Roles">
+            <summary>
+                Роли пользователя.
+            </summary>
+        </member>
+        <member name="T:AirAstana.Auth.Identity.IUserIdentityAccessToken">
+            <summary>
+                Интерфейс для добавления токена доступа.
+            </summary>
+        </member>
+        <member name="M:AirAstana.Auth.Identity.IUserIdentityAccessToken.SetAccessToken(System.String)">
+            <summary>
+                Установить токен доступа.
+            </summary>
+            <param name="accessToken">Токен доступа.</param>
+            <returns>IUserIdentityBuilder</returns>
+        </member>
+        <member name="T:AirAstana.Auth.Identity.IUserIdentityBuilder">
+            <summary>
+                Построитель для UserIdentity.
+            </summary>
+        </member>
+        <member name="M:AirAstana.Auth.Identity.IUserIdentityBuilder.Build">
+            <summary>
+                Построить удостоверение пользователя.
+            </summary>
+            <returns>Удостоверение пользователя.</returns>
+        </member>
+        <member name="T:AirAstana.Auth.Identity.UserIdentityBuilder">
+            <summary>
+                Построитель для UserIdentity.
+            </summary>
+        </member>
+        <member name="M:AirAstana.Auth.Identity.UserIdentityBuilder.Build">
+            <summary>
+                Построить удостоверение пользователя.
+            </summary>
+            <returns>Удостоверение пользователя.</returns>
+        </member>
+        <member name="M:AirAstana.Auth.Identity.UserIdentityBuilder.SetAccessToken(System.String)">
+            <summary>
+                Установить токен доступа.
+            </summary>
+            <param name="accessToken">Токен доступа.</param>
+            <returns>IUserIdentityBuilder</returns>
+        </member>
+        <member name="T:AirAstana.Auth.Identity.UserIdentityClaimsTypes">
+            <summary>
+                Дополнительные клеймы для <see cref="T:AirAstana.Auth.Identity.UserIdentity"/>
+            </summary>
+        </member>
+        <member name="F:AirAstana.Auth.Identity.UserIdentityClaimsTypes.IsAuthorized">
+            <summary>
+                Флаг, авторизован ли пользователь.
+            </summary>
+        </member>
+    </members>
+</doc>
