@@ -7,13 +7,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{D4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auth", "Auth", "{28769D42-D00F-4975-8541-28E9656775B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirAstana.Auth.Api", "Services\Auth\AirAstana.Auth.Api\AirAstana.Auth.Api.csproj", "{45363AA1-215B-4182-834F-8C5EB2B9EDA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Auth.Api", "Services\Auth\AirAstana.Auth.Api\AirAstana.Auth.Api.csproj", "{45363AA1-215B-4182-834F-8C5EB2B9EDA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirAstana.Auth.Api.Models", "Services\Auth\AirAstana.Auth.Api.Models\AirAstana.Auth.Api.Models.csproj", "{E67C82A6-CE3C-4B58-9BFC-135408009A5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Auth.Api.Models", "Services\Auth\AirAstana.Auth.Api.Models\AirAstana.Auth.Api.Models.csproj", "{E67C82A6-CE3C-4B58-9BFC-135408009A5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirAstana.Auth.Service", "Services\Auth\AirAstana.Auth.Service\AirAstana.Auth.Service.csproj", "{BE618832-3A70-44C2-8F51-9F1812580FEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Auth.Service", "Services\Auth\AirAstana.Auth.Service\AirAstana.Auth.Service.csproj", "{BE618832-3A70-44C2-8F51-9F1812580FEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirAstana.Auth.Identity", "Services\Auth\AirAstana.Auth.Identity\AirAstana.Auth.Identity.csproj", "{731DA113-FFD1-4B8E-B581-BAB7C55A364E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Auth.Identity", "Services\Auth\AirAstana.Auth.Identity\AirAstana.Auth.Identity.csproj", "{731DA113-FFD1-4B8E-B581-BAB7C55A364E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirAstana.Auth.Infrastructure", "Services\Auth\AirAstana.Auth.Infrastructure\AirAstana.Auth.Infrastructure.csproj", "{D7067F61-2B19-4DE6-9367-0375940F0D1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirAstana.Auth.Core", "Services\Auth\AirAstana.Auth.Core\AirAstana.Auth.Core.csproj", "{C523715D-AEFC-4DB3-AB26-9EADAF309A2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirAstana.Auth.Options", "Services\Auth\AirAstana.Auth.Options\AirAstana.Auth.Options.csproj", "{54D76B87-BA66-4527-AE85-2DC9D4B12F24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirAstana.Auth.Infrastructure.UnitTests", "Services\Auth\Tests\AirAstana.Auth.Infrastructure.UnitTests\AirAstana.Auth.Infrastructure.UnitTests.csproj", "{69C9501B-DE7A-417D-881C-C9A9818575C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D20C4C35-83EF-4D5B-814F-34BB12B3A1B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +47,22 @@ Global
 		{731DA113-FFD1-4B8E-B581-BAB7C55A364E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{731DA113-FFD1-4B8E-B581-BAB7C55A364E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{731DA113-FFD1-4B8E-B581-BAB7C55A364E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7067F61-2B19-4DE6-9367-0375940F0D1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7067F61-2B19-4DE6-9367-0375940F0D1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7067F61-2B19-4DE6-9367-0375940F0D1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7067F61-2B19-4DE6-9367-0375940F0D1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C523715D-AEFC-4DB3-AB26-9EADAF309A2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C523715D-AEFC-4DB3-AB26-9EADAF309A2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C523715D-AEFC-4DB3-AB26-9EADAF309A2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C523715D-AEFC-4DB3-AB26-9EADAF309A2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54D76B87-BA66-4527-AE85-2DC9D4B12F24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54D76B87-BA66-4527-AE85-2DC9D4B12F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54D76B87-BA66-4527-AE85-2DC9D4B12F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54D76B87-BA66-4527-AE85-2DC9D4B12F24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69C9501B-DE7A-417D-881C-C9A9818575C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69C9501B-DE7A-417D-881C-C9A9818575C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69C9501B-DE7A-417D-881C-C9A9818575C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69C9501B-DE7A-417D-881C-C9A9818575C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,7 +72,12 @@ Global
 		{45363AA1-215B-4182-834F-8C5EB2B9EDA4} = {28769D42-D00F-4975-8541-28E9656775B9}
 		{E67C82A6-CE3C-4B58-9BFC-135408009A5D} = {28769D42-D00F-4975-8541-28E9656775B9}
 		{BE618832-3A70-44C2-8F51-9F1812580FEC} = {28769D42-D00F-4975-8541-28E9656775B9}
-		{731DA113-FFD1-4B8E-B581-BAB7C55A364E} = {4DAA3840-93D8-48CB-82EA-5EFBC1811DCE}
+		{731DA113-FFD1-4B8E-B581-BAB7C55A364E} = {28769D42-D00F-4975-8541-28E9656775B9}
+		{D7067F61-2B19-4DE6-9367-0375940F0D1D} = {28769D42-D00F-4975-8541-28E9656775B9}
+		{C523715D-AEFC-4DB3-AB26-9EADAF309A2C} = {28769D42-D00F-4975-8541-28E9656775B9}
+		{54D76B87-BA66-4527-AE85-2DC9D4B12F24} = {28769D42-D00F-4975-8541-28E9656775B9}
+		{69C9501B-DE7A-417D-881C-C9A9818575C3} = {D20C4C35-83EF-4D5B-814F-34BB12B3A1B1}
+		{D20C4C35-83EF-4D5B-814F-34BB12B3A1B1} = {28769D42-D00F-4975-8541-28E9656775B9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D273FF58-B7B8-4208-BD66-79BF76404633}
