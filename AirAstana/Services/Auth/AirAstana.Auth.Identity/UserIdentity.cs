@@ -1,5 +1,4 @@
-﻿using IdentityModel;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -18,33 +17,36 @@ namespace AirAstana.Auth.Identity
         /// <summary>
         ///     Конструктор.
         /// </summary>
-        /// <param name="id">ID пользователя.</param>
-        /// <param name="name">Логин пользователя.</param>
+        /// <param name="id">ID пользователя.</param>        
         /// <param name="userName">Имя пользователя.</param>
+        /// /// <param name="name">Логин пользователя.</param>
         /// <param name="zoneInfo">Часовой пояс пользователя.</param>
         /// <param name="locale">Локаль пользователя.</param>
         /// <param name="clientId">ID клиента.</param>
-        /// <param name="isAuthorized">Флаг, авторизован ли пользователь в системе.</param>
+        /// <param name="jwtId">ID токена.</param>
+        /// <param name="issuedAt">Дата выдачи токена.</param>
         /// <param name="roles">Роли пользователя.</param>
         public UserIdentity(
-            int id,
-           string name,
+           int id,           
            string userName,
+           string name,
            string zoneInfo,
            string locale,
            string clientId,
-           bool isAuthorized,
+           string jwtId,
+           string issuedAt,
            IEnumerable<string> roles)
            : this(new[]
            {
-                new Claim(JwtClaimTypes.Id, id.ToString()),
-                new Claim(JwtClaimTypes.Name, name),
-                new Claim(JwtClaimTypes.Subject, userName),
-                new Claim(JwtClaimTypes.ZoneInfo, zoneInfo),
-                new Claim(JwtClaimTypes.Locale, locale),
-                new Claim(JwtClaimTypes.ClientId, clientId),
-                new Claim(UserIdentityClaimsTypes.IsAuthorized, isAuthorized.ToString()),
-           }.Concat(roles.Select(r => new Claim(JwtClaimTypes.Role, r))))
+                new Claim(UserIdentityConstants.Id, id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, userName),
+                new Claim(UserIdentityConstants.Name, name),                
+                new Claim(UserIdentityConstants.ZoneInfo, zoneInfo),
+                new Claim(UserIdentityConstants.Locale, locale),
+                new Claim(UserIdentityConstants.ClientId, clientId),
+                new Claim(JwtRegisteredClaimNames.Jti, jwtId),
+                new Claim(JwtRegisteredClaimNames.Iat, issuedAt),
+           }.Concat(roles.Select(r => new Claim(UserIdentityConstants.Role, r))))
         {
 
         }
@@ -53,7 +55,7 @@ namespace AirAstana.Auth.Identity
         ///     Конструктор.
         /// </summary>
         public UserIdentity(IEnumerable<Claim> claims)
-            : base(claims, JwtConstants.TokenType, JwtClaimTypes.Name, JwtClaimTypes.Role)
+            : base(claims, JwtConstants.TokenType, UserIdentityConstants.AuthenticationTypes.Jwt, UserIdentityConstants.Role)
         {
 
         }
@@ -65,7 +67,7 @@ namespace AirAstana.Auth.Identity
         {
             get
             {
-                var first = FindFirst(JwtClaimTypes.Id);
+                var first = FindFirst(UserIdentityConstants.Id);
                 if (first == null || !int.TryParse(first.Value, out int result)) return -1;
                 return result;
             }
@@ -78,7 +80,7 @@ namespace AirAstana.Auth.Identity
         {
             get
             {
-                return FindFirst(JwtClaimTypes.Subject)?.Value;
+                return FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
             }
         }
 
@@ -89,7 +91,7 @@ namespace AirAstana.Auth.Identity
         {
             get
             {
-                return FindFirst(JwtClaimTypes.Name)?.Value;
+                return FindFirst(UserIdentityConstants.Name)?.Value;
             }
         }
 
@@ -100,7 +102,7 @@ namespace AirAstana.Auth.Identity
         {
             get
             {
-                return FindFirst(JwtClaimTypes.ZoneInfo)?.Value;
+                return FindFirst(UserIdentityConstants.ZoneInfo)?.Value;
             }
         }
 
@@ -111,7 +113,7 @@ namespace AirAstana.Auth.Identity
         {
             get
             {
-                return FindFirst(JwtClaimTypes.Locale)?.Value;
+                return FindFirst(UserIdentityConstants.Locale)?.Value;
             }
         }
 
@@ -137,7 +139,7 @@ namespace AirAstana.Auth.Identity
             get
             {
                 return EpochTime.DateTime(Convert.ToInt64(Math.Truncate(Convert.ToDouble(
-                    FindFirst(JwtClaimTypes.Expiration)?.Value, CultureInfo.InvariantCulture))));
+                    FindFirst(JwtRegisteredClaimNames.Exp)?.Value, CultureInfo.InvariantCulture))));
             }
         }
 
@@ -148,7 +150,7 @@ namespace AirAstana.Auth.Identity
         {
             get
             {
-                return FindAll(JwtClaimTypes.Role).Select(c => c.Value);
+                return FindAll(UserIdentityConstants.Role).Select(c => c.Value);
             }
         }
     }
