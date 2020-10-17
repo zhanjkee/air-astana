@@ -21,10 +21,7 @@ namespace AirAstana.Auth.Infrastructure.UnitTests
             var token = Guid.NewGuid().ToString();
             var id = Guid.NewGuid().ToString();
             var clientId = Guid.NewGuid().ToString();
-            var userInfo = new UserInfo() 
-            { 
-                Id = 1, FirstName = "Admin", LastName = "Admin", Locale = "RU-ru", Roles = new string[] { "Administrator" }, UserName = "admin", ZoneInfo = "Default/UTC" 
-            };
+            var userInfo = new UserInfo(Guid.NewGuid().ToString(), "admin", "Admin", "Admin", "RU-ru", "Default/UTC", new string[] { "Administrator" });
             var jwtIssuerOptions = new JwtIssuerOptions
             {
                 Issuer = "",

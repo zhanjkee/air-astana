@@ -27,7 +27,7 @@ namespace AirAstana.Auth.Identity
         /// <param name="issuedAt">Дата выдачи токена.</param>
         /// <param name="roles">Роли пользователя.</param>
         public UserIdentity(
-           int id,           
+           string id,           
            string userName,
            string name,
            string zoneInfo,
@@ -63,13 +63,11 @@ namespace AirAstana.Auth.Identity
         /// <summary>
         ///     ID пользователя.
         /// </summary>
-        public int Id
+        public string Id
         {
             get
             {
-                var first = FindFirst(UserIdentityConstants.Id);
-                if (first == null || !int.TryParse(first.Value, out int result)) return -1;
-                return result;
+                return FindFirst(UserIdentityConstants.Id)?.Value;
             }
         }
 

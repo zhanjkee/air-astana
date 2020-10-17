@@ -4,13 +4,24 @@ namespace AirAstana.Auth.Core.Models
 {
     public class UserInfo
     {
-        public int Id { get; set; }
-        public string UserName { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Locale { get; set; }
-        public string ZoneInfo { get; set; }
-        public IEnumerable<string> Roles { get; set; }
+        public string Id { get; }
+        public string UserName { get; }
+        public string FirstName { get; }
+        public string LastName { get; }
+        public string Locale { get; }
+        public string ZoneInfo { get; }
+        public IEnumerable<string> Roles { get; }
+
+        public UserInfo(string id, string userName, string firstName, string lastName, string locale, string zoneInfo, IEnumerable<string> roles)
+        {
+            Id = id;
+            UserName = userName;
+            FirstName = firstName;
+            LastName = lastName;
+            Locale = locale;
+            ZoneInfo = zoneInfo;
+            Roles = roles;
+        }
 
         public override string ToString()
         {
