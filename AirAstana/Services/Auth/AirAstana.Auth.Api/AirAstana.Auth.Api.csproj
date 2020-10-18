@@ -11,6 +11,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AirAstana.Auth.Api.Models\AirAstana.Auth.Api.Models.csproj" />
+    <ProjectReference Include="..\AirAstana.Auth.Core\AirAstana.Auth.Core.csproj" />
+    <ProjectReference Include="..\AirAstana.Auth.Options\AirAstana.Auth.Options.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,5 +10,7 @@
             Success = success;
             Message = message;
         }
+
+        public bool IsFailure() => !Success;
     }
 }
