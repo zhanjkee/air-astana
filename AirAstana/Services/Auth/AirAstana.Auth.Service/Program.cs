@@ -23,6 +23,6 @@ namespace AirAstana.Auth.Service
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                }).ConfigureServices(x=>x.AddAutofac());
+                });
     }
 }

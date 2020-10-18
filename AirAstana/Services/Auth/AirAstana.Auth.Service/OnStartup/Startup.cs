@@ -10,6 +10,7 @@ namespace AirAstana.Auth.Service.OnStartup
 {
     public class Startup
     {
+        public static readonly string ApiVersion = "v1";
         public ILifetimeScope AutofacContainer { get; private set; }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -21,6 +22,14 @@ namespace AirAstana.Auth.Service.OnStartup
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint($"/swagger/v1/swagger.json", "AirAstana auth service");
+                c.RoutePrefix = "swagger";
+            });
+
 
             app.UseRouting();
 
@@ -40,6 +49,7 @@ namespace AirAstana.Auth.Service.OnStartup
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSwagger(ApiVersion);
         }
     }
 }

@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Workspace\air-astana-v1\AirAstana\Services\Auth\AirAstana.Auth.Api\AirAstana.Auth.Api.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
@@ -13,6 +17,12 @@
     <ProjectReference Include="..\AirAstana.Auth.Api.Models\AirAstana.Auth.Api.Models.csproj" />
     <ProjectReference Include="..\AirAstana.Auth.Core\AirAstana.Auth.Core.csproj" />
     <ProjectReference Include="..\AirAstana.Auth.Options\AirAstana.Auth.Options.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="AirAstana.Auth.Api.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

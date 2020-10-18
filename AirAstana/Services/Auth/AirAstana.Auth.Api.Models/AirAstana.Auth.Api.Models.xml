@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AirAstana.Auth.Api.Models</name>
+    </assembly>
+    <members>
+        <member name="T:AirAstana.Auth.Api.Models.Common.AccessToken">
+            <summary>
+                Токен доступа пользователя.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Common.AccessToken.Token">
+            <summary>
+                Токен.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Common.AccessToken.ExpiresIn">
+            <summary>
+                Время истечения токена в тиках.
+            </summary>
+        </member>
+        <member name="M:AirAstana.Auth.Api.Models.Common.AccessToken.#ctor(System.String,System.Int32)">
+            <summary>
+            Конструктор.
+            </summary>
+            <param name="token">Токен.</param>
+            <param name="expiresIn">Время истечения токена в тиках.</param>
+        </member>
+        <member name="T:AirAstana.Auth.Api.Models.Common.WebResponse">
+            <summary>
+                The web response class.
+            </summary>
+        </member>
+        <member name="M:AirAstana.Auth.Api.Models.Common.WebResponse.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:AirAstana.Auth.Api.Models.Common.WebResponse"/> class.
+            </summary>
+        </member>
+        <member name="M:AirAstana.Auth.Api.Models.Common.WebResponse.#ctor(System.Object)">
+            <summary>
+                Initializes a new instance of the <see cref="T:AirAstana.Auth.Api.Models.Common.WebResponse"/> class.
+            </summary>
+            <param name="body">The body.</param>
+        </member>
+        <member name="M:AirAstana.Auth.Api.Models.Common.WebResponse.#ctor(System.Exception)">
+            <summary>
+                Initializes a new instance of the <see cref="T:AirAstana.Auth.Api.Models.Common.WebResponse"/> class.
+            </summary>
+            <param name="exception">The exception.</param>
+        </member>
+        <member name="M:AirAstana.Auth.Api.Models.Common.WebResponse.#ctor(System.Collections.Generic.ICollection{AirAstana.Auth.Api.Models.Common.ErrorMessage})">
+            <summary>
+                Initializes a new instance of the <see cref="T:AirAstana.Auth.Api.Models.Common.WebResponse"/> class.
+            </summary>
+            <param name="errorMessages">The error messages.</param>
+        </member>
+        <member name="M:AirAstana.Auth.Api.Models.Common.WebResponse.#ctor(System.Object,System.Collections.Generic.ICollection{AirAstana.Auth.Api.Models.Common.ErrorMessage})">
+            <summary>
+                Initializes a new instance of the <see cref="T:AirAstana.Auth.Api.Models.Common.WebResponse"/> class.
+            </summary>
+            <param name="body">The body.</param>
+            <param name="errorMessages">The error messages.</param>
+        </member>
+        <member name="T:AirAstana.Auth.Api.Models.Common.WebResponse`1">
+            <summary>
+                The web response class.
+            </summary>
+            <typeparam name="TBody">The type of the body.</typeparam>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Common.WebResponse`1.Errors">
+            <summary>
+                Gets or sets the errors.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Common.WebResponse`1.Body">
+            <summary>
+                Gets or sets the body.
+            </summary>
+        </member>
+        <member name="T:AirAstana.Auth.Api.Models.Common.ErrorMessage">
+            <summary>
+            The error message class.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Common.ErrorMessage.Key">
+            <summary>
+                Gets or sets the key.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Common.ErrorMessage.Params">
+            <summary>
+                Gets or sets the parameters.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Common.ErrorMessage.Message">
+            <summary>
+                Gets or sets the message.
+            </summary>
+        </member>
+        <member name="T:AirAstana.Auth.Api.Models.Requests.ExchangeRefreshTokenRequest">
+            <summary>
+                The exchange refresh token request model.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Requests.ExchangeRefreshTokenRequest.AccessToken">
+            <summary>
+                Gets or sets the access token.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Requests.ExchangeRefreshTokenRequest.RefreshToken">
+            <summary>
+                Gets or sets the refresh token.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Requests.ExchangeRefreshTokenRequest.ClientId">
+            <summary>
+                Gets or sets the client identifier.
+            </summary>
+        </member>
+        <member name="T:AirAstana.Auth.Api.Models.Requests.LoginRequest">
+            <summary>
+                The login request model.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Requests.LoginRequest.UserName">
+            <summary>
+                Gets or sets the name of the user.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Requests.LoginRequest.Password">
+            <summary>
+                Gets or sets the password.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Requests.LoginRequest.ClientId">
+            <summary>
+                Gets or sets the client identifier.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Requests.LoginRequest.Locale">
+            <summary>
+                Gets or sets the locale.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Requests.LoginRequest.ZoneInfo">
+            <summary>
+                Gets or sets the zone information.
+            </summary>
+        </member>
+        <member name="T:AirAstana.Auth.Api.Models.Responses.ExchangeRefreshTokenResponse">
+            <summary>
+                The exchange refresh token response model.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Responses.ExchangeRefreshTokenResponse.AccessToken">
+            <summary>
+                Gets the access token.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Responses.ExchangeRefreshTokenResponse.RefreshToken">
+            <summary>
+                Gets the refresh token.
+            </summary>
+        </member>
+        <member name="M:AirAstana.Auth.Api.Models.Responses.ExchangeRefreshTokenResponse.#ctor(AirAstana.Auth.Api.Models.Common.AccessToken,System.String)">
+            <summary>
+                Initializes a new instance of the <see cref="T:AirAstana.Auth.Api.Models.Responses.ExchangeRefreshTokenResponse"/> class.
+            </summary>
+            <param name="accessToken">The access token.</param>
+            <param name="refreshToken">The refresh token.</param>
+        </member>
+        <member name="T:AirAstana.Auth.Api.Models.Responses.LoginResponse">
+            <summary>
+                The login response model.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Responses.LoginResponse.AccessToken">
+            <summary>
+                Gets the access token.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Responses.LoginResponse.RefreshToken">
+            <summary>
+                Gets the refresh token.
+            </summary>
+        </member>
+        <member name="M:AirAstana.Auth.Api.Models.Responses.LoginResponse.#ctor(AirAstana.Auth.Api.Models.Common.AccessToken,System.String)">
+            <summary>
+                Initializes a new instance of the <see cref="T:AirAstana.Auth.Api.Models.Responses.LoginResponse"/> class.
+            </summary>
+            <param name="accessToken">The access token.</param>
+            <param name="refreshToken">The refresh token.</param>
+        </member>
+    </members>
+</doc>
