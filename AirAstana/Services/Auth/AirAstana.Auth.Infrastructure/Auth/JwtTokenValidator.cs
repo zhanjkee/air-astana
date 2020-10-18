@@ -31,6 +31,7 @@ namespace AirAstana.Auth.Infrastructure.Auth
         public UserIdentity GetUserIdentityFromToken(string token, string signingKey)
         {
             var principal = GetPrincipalFromToken(token, signingKey);
+            if (principal == null) return null;
             return new UserIdentity(principal.Claims);
         }
     }

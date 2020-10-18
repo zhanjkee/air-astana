@@ -18,10 +18,10 @@ namespace AirAstana.Auth.Infrastructure.Auth
         private readonly IJwtTokenHandler _jwtTokenHandler;
         private readonly JwtIssuerOptions _jwtOptions;
 
-        public JwtFactory(IJwtTokenHandler jwtTokenHandler, IOptions<JwtIssuerOptions> jwtOptions)
+        public JwtFactory(IJwtTokenHandler jwtTokenHandler, JwtIssuerOptions jwtOptions)
         {
             _jwtTokenHandler = jwtTokenHandler;
-            _jwtOptions = jwtOptions.Value;
+            _jwtOptions = jwtOptions;
             ThrowIfInvalidOptions(_jwtOptions);
         }
 

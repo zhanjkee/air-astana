@@ -5,7 +5,7 @@
         /// <summary>
         ///     The section name.
         /// </summary>
-        public const string SectionName = "AuthService";
+        public const string SectionName = "AuthSettings";
 
         /// <summary>
         ///     Gets or sets the secret key.
