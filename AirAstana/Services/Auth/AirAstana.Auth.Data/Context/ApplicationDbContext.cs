@@ -25,10 +25,11 @@ namespace AirAstana.Auth.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             var dateTimeUtcConverter = new ValueConverter<DateTime, DateTime>(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
             modelBuilder.UseValueConverterForType<DateTime>(dateTimeUtcConverter);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.SeedData();
         }
 
         public override int SaveChanges()
