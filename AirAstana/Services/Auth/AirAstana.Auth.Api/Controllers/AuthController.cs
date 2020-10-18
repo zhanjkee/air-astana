@@ -4,7 +4,7 @@ namespace AirAstana.Auth.Api.Controllers
 {
     [Route("api/auth")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : BaseController
     {
         [HttpGet]
         public IActionResult ToDo()
