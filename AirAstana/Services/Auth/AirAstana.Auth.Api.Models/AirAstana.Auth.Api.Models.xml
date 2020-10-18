@@ -147,6 +147,36 @@
                 Gets or sets the zone information.
             </summary>
         </member>
+        <member name="T:AirAstana.Auth.Api.Models.Requests.RegisterUserRequest">
+            <summary>
+                The register user request model.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Requests.RegisterUserRequest.FirstName">
+            <summary>
+                Gets or sets the first name.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Requests.RegisterUserRequest.LastName">
+            <summary>
+                Gets or sets the last name.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Requests.RegisterUserRequest.Email">
+            <summary>
+                Gets or sets the email.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Requests.RegisterUserRequest.UserName">
+            <summary>
+                Gets or sets the name of the user.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Requests.RegisterUserRequest.Password">
+            <summary>
+                Gets or sets the password.
+            </summary>
+        </member>
         <member name="T:AirAstana.Auth.Api.Models.Responses.ExchangeRefreshTokenResponse">
             <summary>
                 The exchange refresh token response model.
@@ -190,6 +220,22 @@
             </summary>
             <param name="accessToken">The access token.</param>
             <param name="refreshToken">The refresh token.</param>
+        </member>
+        <member name="T:AirAstana.Auth.Api.Models.Responses.RegisterUserResponse">
+            <summary>
+                The register user response model.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Models.Responses.RegisterUserResponse.Id">
+            <summary>
+                Gets the identifier.
+            </summary>
+        </member>
+        <member name="M:AirAstana.Auth.Api.Models.Responses.RegisterUserResponse.#ctor(System.String)">
+            <summary>
+                Initializes a new instance of the <see cref="T:AirAstana.Auth.Api.Models.Responses.RegisterUserResponse"/> class.
+            </summary>
+            <param name="id">The identifier.</param>
         </member>
     </members>
 </doc>

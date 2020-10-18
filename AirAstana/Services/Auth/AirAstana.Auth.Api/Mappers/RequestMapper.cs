@@ -1,5 +1,6 @@
 ﻿using AirAstana.Auth.Api.Models.Requests;
 using AirAstana.Auth.Core.Commands.ExchangeRefreshToken;
+using AirAstana.Auth.Core.Commands.RegisterUser;
 using AirAstana.Auth.Core.Queries.Login;
 
 namespace AirAstana.Auth.Api.Mappers
@@ -31,5 +32,15 @@ namespace AirAstana.Auth.Api.Mappers
             request == null
             ? null
             : new ExchangeRefreshTokenCommand(request.AccessToken, request.RefreshToken, signingKey, remoteIpAddress, request.ClientId);
+
+        /// <summary>
+        ///     Converts to core.
+        /// </summary>
+        /// <param name="request">The request.</param>
+        /// <returns></returns>
+        public static RegisterUserCommand ToCore(this RegisterUserRequest request) =>
+            request == null
+            ? null
+            : new RegisterUserCommand(request.FirstName, request.LastName, request.Email, request.UserName, request.Password, string.Empty, string.Empty);
     }
 }

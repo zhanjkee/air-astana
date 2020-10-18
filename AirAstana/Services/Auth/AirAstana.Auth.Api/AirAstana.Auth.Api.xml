@@ -49,6 +49,17 @@
             </summary>
             <param name="value">The value.</param>
         </member>
+        <member name="T:AirAstana.Auth.Api.Controllers.AccountsController">
+            <summary>
+                Контроллер аккаунтов.
+            </summary>
+        </member>
+        <member name="M:AirAstana.Auth.Api.Controllers.AccountsController.Post(AirAstana.Auth.Api.Models.Requests.RegisterUserRequest)">
+            <summary>
+                The register user action.
+            </summary>
+            <param name="request">The request.</param>
+        </member>
         <member name="T:AirAstana.Auth.Api.Controllers.AuthController">
             <summary>
                 Контроллер аутентификации/авторизации.
@@ -151,6 +162,13 @@
             <param name="remoteIpAddress">The remote ip address.</param>
             <returns></returns>
         </member>
+        <member name="M:AirAstana.Auth.Api.Mappers.RequestMapper.ToCore(AirAstana.Auth.Api.Models.Requests.RegisterUserRequest)">
+            <summary>
+                Converts to core.
+            </summary>
+            <param name="request">The request.</param>
+            <returns></returns>
+        </member>
         <member name="T:AirAstana.Auth.Api.Mappers.ResponseMapper">
             <summary>
                 The response mapper.
@@ -171,6 +189,13 @@
             <returns></returns>
         </member>
         <member name="M:AirAstana.Auth.Api.Mappers.ResponseMapper.ToApi(AirAstana.Auth.Core.Commands.ExchangeRefreshToken.ExchangeRefreshTokenResponse)">
+            <summary>
+                Converts to api.
+            </summary>
+            <param name="response">The response.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AirAstana.Auth.Api.Mappers.ResponseMapper.ToApi(AirAstana.Auth.Core.Commands.RegisterUser.RegisterUserResponse)">
             <summary>
                 Converts to api.
             </summary>

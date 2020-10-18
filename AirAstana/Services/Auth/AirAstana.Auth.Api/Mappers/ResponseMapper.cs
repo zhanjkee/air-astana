@@ -37,5 +37,15 @@ namespace AirAstana.Auth.Api.Mappers
             response == null
             ? null
             : new ExchangeRefreshTokenResponse(response.AccessToken.ToApi(), response.RefreshToken);
+
+        /// <summary>
+        ///     Converts to api.
+        /// </summary>
+        /// <param name="response">The response.</param>
+        /// <returns></returns>
+        public static RegisterUserResponse ToApi(this Core.Commands.RegisterUser.RegisterUserResponse response) =>
+            response == null
+            ? null
+            : new RegisterUserResponse(response.Id);
     }
 }
