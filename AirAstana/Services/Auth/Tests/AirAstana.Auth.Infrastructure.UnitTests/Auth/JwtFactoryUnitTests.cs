@@ -32,7 +32,7 @@ namespace AirAstana.Auth.Infrastructure.UnitTests
             var mockJwtTokenHandler = new Mock<IJwtTokenHandler>();
             mockJwtTokenHandler.Setup(handler => handler.WriteToken(It.IsAny<JwtSecurityToken>())).Returns(token);
 
-            var jwtFactory = new JwtFactory(mockJwtTokenHandler.Object, Microsoft.Extensions.Options.Options.Create(jwtIssuerOptions));
+            var jwtFactory = new JwtFactory(mockJwtTokenHandler.Object, jwtIssuerOptions);
 
             // Act.
             var result = await jwtFactory.GenerateEncodedTokenAsync(userInfo, clientId);
