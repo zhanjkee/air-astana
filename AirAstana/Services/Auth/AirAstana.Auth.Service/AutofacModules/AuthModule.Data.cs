@@ -1,4 +1,5 @@
 ﻿using AirAstana.Auth.Data.Abstract;
+using AirAstana.Auth.Data.Context;
 using AirAstana.Auth.Data.SqlServer;
 using AirAstana.Auth.Options;
 using Autofac;
@@ -13,8 +14,8 @@ namespace AirAstana.Auth.Service.AutofacModules
             {
                 var configuration = x.Resolve<AuthOptions>();
                 var dbContextFactory = new SqlServerDbContextFactory(configuration.ConnectionString);
-                return dbContextFactory;
-            }).As<IDbContextFactory>().InstancePerLifetimeScope();
+                return dbContextFactory.Create();
+            }).As<ApplicationDbContext>().InstancePerLifetimeScope();
         }
     }
 }

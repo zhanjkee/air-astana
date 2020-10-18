@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AirAstana.Auth.Service.OnStartup;
@@ -20,9 +21,19 @@ namespace AirAstana.Auth.Service
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.ConfigureAppConfiguration((hostingContext, configurationBuilder) =>
+                    {
+                        configurationBuilder.Build();
+                    })
+                           .UseKestrel()
+                           .PreferHostingUrls(true)
+                           .ConfigureServices(x => x.AddAutofac())
+                           .UseContentRoot(Directory.GetCurrentDirectory())
+                           .UseStartup<Startup>();
+
                 });
     }
 }
