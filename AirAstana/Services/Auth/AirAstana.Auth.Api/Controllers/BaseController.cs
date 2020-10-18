@@ -11,6 +11,10 @@ namespace AirAstana.Auth.Api.Controllers
     public class BaseController : ControllerBase
     {
         private IMediator _mediator;
+
+        /// <summary>
+        ///     Gets the mediator.
+        /// </summary>
         protected IMediator Mediator => _mediator ??= (IMediator)HttpContext.RequestServices.GetService(typeof(IMediator));
     }
 }

@@ -7,15 +7,24 @@ using System;
 using System.Threading.Tasks;
 
 namespace AirAstana.Auth.Api.Controllers
-{    
+{
+    /// <summary>
+    ///     Контроллер аутентификации/авторизации.
+    /// </summary>
     [ApiController]
     [Route("api/auth")]
     public class AuthController : BaseController
     {
-        private readonly AuthOptions _authOptions;
-        public AuthController(AuthOptions authOptions)
+        private readonly ServiceOptions _serviceOptions;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="AuthController"/> class.
+        /// </summary>
+        /// <param name="serviceOptions">The service options.</param>
+        /// <exception cref="ArgumentNullException">serviceOptions</exception>
+        public AuthController(ServiceOptions serviceOptions)
         {
-            _authOptions = authOptions ?? throw new ArgumentNullException(nameof(authOptions));
+            _serviceOptions = serviceOptions ?? throw new ArgumentNullException(nameof(serviceOptions));
         }
 
         /// <summary>
@@ -42,7 +51,7 @@ namespace AirAstana.Auth.Api.Controllers
         public async Task<IActionResult> RefreshToken([FromBody] ExchangeRefreshTokenRequest request)
         {
             var exchangeRefreshTokenResponse = await Mediator.Send(
-                request.ToCore(_authOptions.SecretKey, Request.HttpContext.Connection.RemoteIpAddress?.ToString()));
+                request.ToCore(_serviceOptions.SecretKey, Request.HttpContext.Connection.RemoteIpAddress?.ToString()));
 
             return exchangeRefreshTokenResponse.IsFailure()
                 ? this.BadRequestWebResponse(exchangeRefreshTokenResponse.Message)

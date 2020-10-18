@@ -49,6 +49,18 @@
             </summary>
             <param name="value">The value.</param>
         </member>
+        <member name="T:AirAstana.Auth.Api.Controllers.AuthController">
+            <summary>
+                Контроллер аутентификации/авторизации.
+            </summary>
+        </member>
+        <member name="M:AirAstana.Auth.Api.Controllers.AuthController.#ctor(AirAstana.Auth.Options.ServiceOptions)">
+            <summary>
+                Initializes a new instance of the <see cref="T:AirAstana.Auth.Api.Controllers.AuthController"/> class.
+            </summary>
+            <param name="serviceOptions">The service options.</param>
+            <exception cref="T:System.ArgumentNullException">serviceOptions</exception>
+        </member>
         <member name="M:AirAstana.Auth.Api.Controllers.AuthController.Login(AirAstana.Auth.Api.Models.Requests.LoginRequest)">
             <summary>
                 Login action.
@@ -64,6 +76,11 @@
         <member name="T:AirAstana.Auth.Api.Controllers.BaseController">
             <summary>
                 Базовый контроллер.
+            </summary>
+        </member>
+        <member name="P:AirAstana.Auth.Api.Controllers.BaseController.Mediator">
+            <summary>
+                Gets the mediator.
             </summary>
         </member>
         <member name="T:AirAstana.Auth.Api.Extensions.ApiControllerActionResultExtention">
@@ -112,6 +129,11 @@
                 Возвращает WebResponse с кодом 500 и описанием проблемы
             </summary>
         </member>
+        <member name="T:AirAstana.Auth.Api.Mappers.RequestMapper">
+            <summary>
+                The request mapper.
+            </summary>
+        </member>
         <member name="M:AirAstana.Auth.Api.Mappers.RequestMapper.ToCore(AirAstana.Auth.Api.Models.Requests.LoginRequest,System.String)">
             <summary>
                 Converts to core.
@@ -128,6 +150,11 @@
             <param name="signingKey">The signing key.</param>
             <param name="remoteIpAddress">The remote ip address.</param>
             <returns></returns>
+        </member>
+        <member name="T:AirAstana.Auth.Api.Mappers.ResponseMapper">
+            <summary>
+                The response mapper.
+            </summary>
         </member>
         <member name="M:AirAstana.Auth.Api.Mappers.ResponseMapper.ToApi(AirAstana.Auth.Core.Queries.Login.LoginResponse)">
             <summary>

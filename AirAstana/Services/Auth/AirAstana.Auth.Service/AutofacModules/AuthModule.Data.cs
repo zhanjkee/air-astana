@@ -12,7 +12,7 @@ namespace AirAstana.Auth.Service.AutofacModules
         {
             builder.Register(x =>
             {
-                var configuration = x.Resolve<AuthOptions>();
+                var configuration = x.Resolve<ServiceOptions>();
                 var dbContextFactory = new SqlServerDbContextFactory(configuration.ConnectionString);
                 return dbContextFactory.Create();
             }).As<ApplicationDbContext>().InstancePerLifetimeScope();

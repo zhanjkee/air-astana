@@ -46,7 +46,7 @@ namespace AirAstana.Auth.Core.Queries.Login
 
         private LoginResponse LoginFailure(string msg)
         {
-            return new LoginResponse(new[] { new Error("login_failure", msg) });
+            return new LoginResponse(new[] { new Error("login_failure", msg) }, message: msg);
         }
     }
 }

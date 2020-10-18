@@ -4,6 +4,9 @@ using AirAstana.Auth.Core.Queries.Login;
 
 namespace AirAstana.Auth.Api.Mappers
 {
+    /// <summary>
+    ///     The request mapper.
+    /// </summary>
     public static class RequestMapper
     {
         /// <summary>

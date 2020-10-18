@@ -3,6 +3,9 @@ using AirAstana.Auth.Api.Models.Responses;
 
 namespace AirAstana.Auth.Api.Mappers
 {
+    /// <summary>
+    ///     The response mapper.
+    /// </summary>
     public static class ResponseMapper
     {
         /// <summary>

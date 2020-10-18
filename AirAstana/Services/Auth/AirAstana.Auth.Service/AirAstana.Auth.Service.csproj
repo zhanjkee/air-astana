@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.0.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.9" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.6.3" />
   </ItemGroup>
@@ -16,6 +17,10 @@
     <ProjectReference Include="..\AirAstana.Auth.Api\AirAstana.Auth.Api.csproj" />
     <ProjectReference Include="..\AirAstana.Auth.Data.SqlServer\AirAstana.Auth.Data.SqlServer.csproj" />
     <ProjectReference Include="..\AirAstana.Auth.Infrastructure\AirAstana.Auth.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
 
 </Project>
