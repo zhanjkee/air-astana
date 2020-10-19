@@ -37,5 +37,11 @@ namespace AirAstana.Flights.Domain.Entities
         ///     Gets or sets the flight.
         /// </summary>
         public FlightEntity Flight { get; set; }
+
+        /// <summary>
+        ///     Adds the delay time.
+        /// </summary>
+        /// <param name="delay">The delay.</param>
+        public void AddDelayTime(TimeSpan delay) => Delay = delay;
     }
 }
