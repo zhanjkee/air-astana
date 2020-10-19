@@ -1,11 +1,14 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AirAstana.Shared.Extensions;
+using AirAstana.Shared.Exceptions;
+using FluentValidation.Results;
+using System.Collections.Generic;
+using System.Text;
 
 namespace AirAstana.Auth.Core.Behaviors
 {
@@ -24,7 +27,7 @@ namespace AirAstana.Auth.Core.Behaviors
         {
             var typeName = request.GetGenericTypeName();
 
-            _logger.LogInformation("----- Validating request {RequestType}", typeName);
+            _logger.LogInformation("----- Validating request {CommandType}", typeName);
 
             var failures = _validators
                 .Select(v => v.Validate(request))
@@ -34,12 +37,22 @@ namespace AirAstana.Auth.Core.Behaviors
 
             if (failures.Any())
             {
-                _logger.LogWarning("Validation errors - {RequestType} - Request: {@Request} - Errors: {@ValidationErrors}", typeName, request, failures);
+                _logger.LogWarning("Validation errors - {CommandType} - Request: {@Command} - Errors: {@ValidationErrors}", typeName, request, failures);
 
-                throw new Exception($"Request Validation Errors for type {typeof(TRequest).Name}", new ValidationException("Validation exception", failures));
+                throw new BadRequestException(GetValidationErrorText(failures));
             }
 
             return await next();
+        }
+
+        private static string GetValidationErrorText(List<ValidationFailure> errors)
+        {
+            var sb = new StringBuilder();
+            foreach (var error in errors) 
+                sb.Append(error.ErrorMessage)
+                    .AppendLine();
+
+            return sb.ToString();
         }
     }
 }

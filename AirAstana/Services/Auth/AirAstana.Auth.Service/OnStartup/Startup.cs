@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using AirAstana.Shared.Extensions;
+using AirAstana.Auth.Service.Filters;
 
 namespace AirAstana.Auth.Service.OnStartup
 {
@@ -98,10 +99,10 @@ namespace AirAstana.Auth.Service.OnStartup
         /// </summary>
         /// <param name="services">The services.</param>
         public void ConfigureServices(IServiceCollection services)
-        {          
-            services.AddControllers();
+        {                      
             services.AddSwagger(ApiVersion);
             services.AddAuthentication(JwtIssuerOptions, IssuerSigningKey);
+            services.AddControllers(options => { options.Filters.Add(typeof(HttpGlobalExceptionFilter)); });
         }
     }
 }
