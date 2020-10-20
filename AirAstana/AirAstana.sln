@@ -59,13 +59,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Flights.Domain", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{22CE281D-D67B-4C46-850C-F5D8429DEF4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirAstana.Flights.Data", "Services\Flights\AirAstana.Flights.Data\AirAstana.Flights.Data.csproj", "{E251F344-3938-4D49-A4AF-E08F66D4EDD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Flights.Data", "Services\Flights\AirAstana.Flights.Data\AirAstana.Flights.Data.csproj", "{E251F344-3938-4D49-A4AF-E08F66D4EDD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirAstana.Flights.Data.InMemory", "Services\Flights\AirAstana.Flights.Data.InMemory\AirAstana.Flights.Data.InMemory.csproj", "{A7BFE48C-9B74-4AC7-BA0C-95A010904B97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Flights.Data.InMemory", "Services\Flights\AirAstana.Flights.Data.InMemory\AirAstana.Flights.Data.InMemory.csproj", "{A7BFE48C-9B74-4AC7-BA0C-95A010904B97}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E0F29544-8DC4-43F9-B542-EE0CD1D119AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirAstana.Flights.Data.UnitTests", "Services\Flights\Tests\AirAstana.Flights.Data.UnitTests\AirAstana.Flights.Data.UnitTests.csproj", "{0F544C94-9965-4401-8844-B3498805E998}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Flights.Data.UnitTests", "Services\Flights\Tests\AirAstana.Flights.Data.UnitTests\AirAstana.Flights.Data.UnitTests.csproj", "{0F544C94-9965-4401-8844-B3498805E998}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirAstana.Flights.Data.SqlServer", "Services\Flights\AirAstana.Flights.Data.SqlServer\AirAstana.Flights.Data.SqlServer.csproj", "{C0AA2838-5216-4024-84FE-5610615485BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -145,6 +147,10 @@ Global
 		{0F544C94-9965-4401-8844-B3498805E998}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F544C94-9965-4401-8844-B3498805E998}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F544C94-9965-4401-8844-B3498805E998}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0AA2838-5216-4024-84FE-5610615485BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0AA2838-5216-4024-84FE-5610615485BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0AA2838-5216-4024-84FE-5610615485BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0AA2838-5216-4024-84FE-5610615485BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -180,6 +186,7 @@ Global
 		{A7BFE48C-9B74-4AC7-BA0C-95A010904B97} = {22CE281D-D67B-4C46-850C-F5D8429DEF4A}
 		{E0F29544-8DC4-43F9-B542-EE0CD1D119AD} = {232830AD-701C-42F4-9EA5-D4F311F78E94}
 		{0F544C94-9965-4401-8844-B3498805E998} = {E0F29544-8DC4-43F9-B542-EE0CD1D119AD}
+		{C0AA2838-5216-4024-84FE-5610615485BA} = {22CE281D-D67B-4C46-850C-F5D8429DEF4A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D273FF58-B7B8-4208-BD66-79BF76404633}
