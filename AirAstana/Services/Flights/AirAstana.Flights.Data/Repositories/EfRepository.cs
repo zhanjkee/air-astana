@@ -79,7 +79,7 @@ namespace AirAstana.Flights.Data.Repositories
         /// <returns></returns>
         public virtual async Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default)
         {
-            return await DbSet.FindAsync(id, cancellationToken);
+            return await DbSet.FindAsync(id);
         }
 
         /// <summary>

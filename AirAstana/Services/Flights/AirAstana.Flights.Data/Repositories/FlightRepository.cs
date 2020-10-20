@@ -42,6 +42,15 @@ namespace AirAstana.Flights.Data.Repositories
         }
 
         /// <summary>
+        ///     Gets the flight schedule by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        public async Task<FlightScheduleEntity> GetFlightScheduleByIdAsync(int id)
+        {
+            return await _context.FlightSchedules.FindAsync(id);
+        }
+
+        /// <summary>
         ///     Adds the flight schedule.
         /// </summary>
         /// <param name="flight">The flight.</param>
@@ -57,10 +66,9 @@ namespace AirAstana.Flights.Data.Repositories
         ///     Updates the flight schedule.
         /// </summary>
         /// <param name="flightSchedule">The flight schedule.</param>
-        /// <param name="cancellationToken">The cancellation token.</param>
-        public async Task UpdateScheduleAsync(FlightScheduleEntity flightSchedule, CancellationToken cancellationToken = default)
+        public async Task UpdateScheduleAsync(FlightScheduleEntity flightSchedule)
         {
-            var originalEntity = await _context.FlightSchedules.FindAsync(flightSchedule.Id);
+            var originalEntity = await GetFlightScheduleByIdAsync(flightSchedule.Id);
             _context.Entry(originalEntity).CurrentValues.SetValues(flightSchedule);
         }
 
@@ -69,10 +77,9 @@ namespace AirAstana.Flights.Data.Repositories
         /// </summary>
         /// <param name="flightSchedule">The flight schedule.</param>
         /// <param name="delay">The delay.</param>
-        /// <param name="cancellationToken">The cancellation token.</param>
-        public async Task AddDelayTimeAsync(FlightScheduleEntity flightSchedule, TimeSpan delay, CancellationToken cancellationToken = default)
+        public async Task AddDelayTimeAsync(FlightScheduleEntity flightSchedule, TimeSpan delay)
         {
-            (await _context.FlightSchedules.FindAsync(flightSchedule.Id, cancellationToken)).AddDelayTime(delay);
+            (await GetFlightScheduleByIdAsync(flightSchedule.Id)).AddDelayTime(delay);
         }
 
         public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
