@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AirAstana.Flights.Core.Interfaces.Repositories;
 using AirAstana.Flights.Data.Context;
 using AirAstana.Flights.Data.Specifications;
 using AirAstana.Flights.Domain.Entities;
@@ -11,13 +12,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AirAstana.Flights.Data.Repositories
 {
-    public class FlightRepository : EfRepository<FlightEntity>, IDisposable
+    public class FlightRepository : EfRepository<FlightEntity>, IFlightRepository
     {
         [NotNull] private readonly FlightsContext _context;
 
         public FlightRepository([NotNull] FlightsContext context) : base(context)
         {
             _context = context;
+        }
+
+        /// <summary>
+        ///     Gets the flight schedules.
+        /// </summary>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        public async Task<IEnumerable<FlightScheduleEntity>> GetFlightSchedulesAsync(CancellationToken cancellationToken = default)
+        {
+            return await _context.FlightSchedules.OrderBy(x => x.Departure).ToListAsync(cancellationToken);
         }
 
         /// <summary>
@@ -70,6 +80,15 @@ namespace AirAstana.Flights.Data.Repositories
         {
             var originalEntity = await GetFlightScheduleByIdAsync(flightSchedule.Id);
             _context.Entry(originalEntity).CurrentValues.SetValues(flightSchedule);
+        }
+
+        /// <summary>
+        ///     Delete the flight schedule.
+        /// </summary>
+        /// <param name="flightSchedule">The flight schedule.</param>
+        public void DeleteSchedule(FlightScheduleEntity flightSchedule)
+        {
+            _context.FlightSchedules.Remove(flightSchedule);
         }
 
         /// <summary>

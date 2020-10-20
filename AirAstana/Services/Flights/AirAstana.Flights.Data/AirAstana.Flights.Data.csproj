@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AirAstana.Flights.Core\AirAstana.Flights.Core.csproj" />
     <ProjectReference Include="..\AirAstana.Flights.Domain\AirAstana.Flights.Domain.csproj" />
   </ItemGroup>
 
