@@ -5,5 +5,10 @@ namespace AirAstana.Flights.Core.Commands.Flights.Delete
     public sealed class DeleteFlightCommand : IRequest<DeleteFlightResponse>
     {
         public int FlightId { get; set; }
+
+        public DeleteFlightCommand(int flightId)
+        {
+            FlightId = flightId;
+        }
     }
 }
