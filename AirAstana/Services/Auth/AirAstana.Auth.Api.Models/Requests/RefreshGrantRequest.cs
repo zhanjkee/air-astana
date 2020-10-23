@@ -5,9 +5,9 @@ using static OpenIddict.Abstractions.OpenIddictConstants;
 namespace AirAstana.Auth.Api.Models.Requests
 {
     /// <summary>
-    ///     The login request model.
+    ///     The refresh grant request model.
     /// </summary>
-    public sealed class LoginRequest
+    public sealed class RefreshGrantRequest
     {
         /// <summary>
         ///     Gets or sets the type of the grant.
@@ -17,18 +17,11 @@ namespace AirAstana.Auth.Api.Models.Requests
         public string GrantType { get; set; }
 
         /// <summary>
-        ///     Gets or sets the name of the user.
+        ///     Gets or sets the refresh token.
         /// </summary>
         [Required]
-        [JsonProperty(Parameters.Username)]
-        public string UserName { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the password.
-        /// </summary>
-        [Required]
-        [JsonProperty(Parameters.Password)]
-        public string Password { get; set; }
+        [JsonProperty(GrantTypes.RefreshToken)]
+        public string RefreshToken { get; set; }
 
         /// <summary>
         ///     Gets or sets the scope.

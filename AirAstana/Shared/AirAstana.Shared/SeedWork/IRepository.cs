@@ -26,7 +26,7 @@ namespace AirAstana.Shared.SeedWork
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default);
+        Task<TEntity> GetByIdAsync(object id);
         /// <summary>
         ///     Inserts the specified entity.
         /// </summary>

@@ -3,7 +3,7 @@
     /// <summary>
     ///     The register user response model.
     /// </summary>
-    public class RegisterUserResponse
+    public sealed class RegisterUserResponse
     {
         /// <summary>
         ///     Gets the identifier.

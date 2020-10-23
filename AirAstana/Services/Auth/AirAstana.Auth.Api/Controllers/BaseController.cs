@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AirAstana.Auth.Api.Controllers
@@ -8,13 +8,17 @@ namespace AirAstana.Auth.Api.Controllers
     /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class BaseController : ControllerBase
+    public abstract class BaseController : ControllerBase
     {
-        private IMediator _mediator;
-
         /// <summary>
-        ///     Gets the mediator.
+        ///     Добавить ошибки в ModelState.
         /// </summary>
-        protected IMediator Mediator => _mediator ??= (IMediator)HttpContext.RequestServices.GetService(typeof(IMediator));
+        protected void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+        }
     }
 }
