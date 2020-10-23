@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AirAstana.Auth.Api.Models\AirAstana.Auth.Api.Models.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -14,7 +14,7 @@ namespace AirAstana.Auth.Api.Models.Requests
         /// </summary>
         [Required]
         [JsonProperty(Parameters.GrantType)]
-        public string GrantType { get; set; }
+        public string GrantType { get; set; } = GrantTypes.Password;
 
         /// <summary>
         ///     Gets or sets the name of the user.
