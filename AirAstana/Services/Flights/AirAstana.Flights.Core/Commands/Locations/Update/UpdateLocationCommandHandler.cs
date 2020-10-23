@@ -18,7 +18,7 @@ namespace AirAstana.Flights.Core.Commands.Locations.Update
 
         public async Task<UpdateLocationResponse> Handle(UpdateLocationCommand request, CancellationToken cancellationToken)
         {
-            var location = await _locationRepository.GetByIdAsync(request.Location.Id, cancellationToken);
+            var location = await _locationRepository.GetByIdAsync(request.Location.Id);
             if (location == null) return Result(false, $"Location does not exists by id: {request.Location.Id}");
 
             _locationRepository.Update(request.Location.ToEntity());

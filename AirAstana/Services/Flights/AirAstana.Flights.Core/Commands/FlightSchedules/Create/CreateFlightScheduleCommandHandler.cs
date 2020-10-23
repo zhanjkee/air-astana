@@ -19,7 +19,7 @@ namespace AirAstana.Flights.Core.Commands.FlightSchedules.Create
 
         public async Task<CreateFlightScheduleResponse> Handle(CreateFlightScheduleCommand request, CancellationToken cancellationToken)
         {
-            var flight = await _flightRepository.GetByIdAsync(request.FlightId, cancellationToken);
+            var flight = await _flightRepository.GetByIdAsync(request.FlightId);
             if (flight == null) return Result(false, $"The flight does not exists by id: {request.FlightId}");
             
             await _flightRepository.AddScheduleAsync(flight, request.FlightSchedule.ToEntity(), cancellationToken);

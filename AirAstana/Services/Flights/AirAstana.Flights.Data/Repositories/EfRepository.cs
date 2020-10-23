@@ -24,7 +24,7 @@ namespace AirAstana.Flights.Data.Repositories
         /// </summary>
         /// <param name="context">The context.</param>
         /// <exception cref="ArgumentNullException">context</exception>
-        public EfRepository([NotNull] FlightsContext context)
+        protected EfRepository([NotNull] FlightsContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
@@ -32,13 +32,7 @@ namespace AirAstana.Flights.Data.Repositories
         /// <summary>
         ///     Gets the db set.
         /// </summary>
-        protected DbSet<TEntity> DbSet
-        {
-            get
-            {
-                return _context.Set<TEntity>();
-            }
-        }
+        protected DbSet<TEntity> DbSet => _context.Set<TEntity>();
 
         /// <summary>
         ///     Gets all.
@@ -53,6 +47,7 @@ namespace AirAstana.Flights.Data.Repositories
         ///     Gets the specified filter.
         /// </summary>
         /// <param name="specification">The specification.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         public virtual async Task<IEnumerable<TEntity>> GetAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
         {
@@ -77,7 +72,7 @@ namespace AirAstana.Flights.Data.Repositories
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        public virtual async Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default)
+        public virtual async Task<TEntity> GetByIdAsync(object id)
         {
             return await DbSet.FindAsync(id);
         }
@@ -95,6 +90,7 @@ namespace AirAstana.Flights.Data.Repositories
         ///     Inserts the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         public virtual async Task InsertAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             await DbSet.AddAsync(entity, cancellationToken);
@@ -122,6 +118,7 @@ namespace AirAstana.Flights.Data.Repositories
         ///     Deletes the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         public virtual async Task DeleteAsync(object id, CancellationToken cancellationToken = default)
         {
             Delete(await DbSet.FindAsync(id, cancellationToken));

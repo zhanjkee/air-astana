@@ -1,7 +1,7 @@
-﻿using AirAstana.Auth.Domain.Entities;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
+using AirAstana.Auth.Data.Entities;
 
 namespace AirAstana.Auth.Data.Extensions
 {

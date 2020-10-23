@@ -20,7 +20,7 @@ namespace AirAstana.Flights.Core.Queries.Flights.GetById
 
         public async Task<Flight> Handle(GetFlightQuery request, CancellationToken cancellationToken)
         {
-            return (await _flightRepository.GetByIdAsync(request.FlightId, cancellationToken)).ToModel();
+            return (await _flightRepository.GetByIdAsync(request.FlightId)).ToModel();
         }
     }
 }

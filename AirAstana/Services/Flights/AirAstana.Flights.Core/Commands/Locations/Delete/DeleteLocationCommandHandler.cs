@@ -17,7 +17,7 @@ namespace AirAstana.Flights.Core.Commands.Locations.Delete
 
         public async Task<DeleteLocationResponse> Handle(DeleteLocationCommand request, CancellationToken cancellationToken)
         {
-            var location = await _locationRepository.GetByIdAsync(request.LocationId, cancellationToken);
+            var location = await _locationRepository.GetByIdAsync(request.LocationId);
             if (location == null) return Result(false, $"Location does not exists by id: {request.LocationId}");
 
             _locationRepository.Delete(location);

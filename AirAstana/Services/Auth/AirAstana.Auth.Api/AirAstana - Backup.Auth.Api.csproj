@@ -5,20 +5,25 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile></DocumentationFile>
+    <DocumentationFile>C:\Workspace\air-astana-v1\AirAstana\Services\Auth\AirAstana.Auth.Api\AirAstana.Auth.Api.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
 	  <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
 	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-	  <PackageReference Include="OpenIddict.AspNetCore" Version="3.0.0-beta5.20503.76" />
-	  <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="3.0.0-beta5.20503.76" />
+	  <PackageReference Include="OpenIddict.Core" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AirAstana.Auth.Api.Models\AirAstana.Auth.Api.Models.csproj" />
     <ProjectReference Include="..\AirAstana.Auth.Data\AirAstana.Auth.Data.csproj" />
     <ProjectReference Include="..\AirAstana.Auth.Options\AirAstana.Auth.Options.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="AirAstana.Auth.Api.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

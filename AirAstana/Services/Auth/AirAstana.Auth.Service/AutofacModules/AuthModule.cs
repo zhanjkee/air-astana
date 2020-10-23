@@ -7,9 +7,6 @@ namespace AirAstana.Auth.Service.AutofacModules
         protected override void Load(ContainerBuilder builder)
         {
             RegisterOptions(builder);
-            RegisterInfrastructure(builder);
-            RegisterData(builder);
-            RegisterCore(builder);
         }
     }
 }

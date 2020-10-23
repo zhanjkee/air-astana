@@ -19,7 +19,7 @@ namespace AirAstana.Flights.Core.Queries.Locations.GetById
 
         public async Task<Location> Handle(GetLocationQuery request, CancellationToken cancellationToken)
         {
-            return (await _locationRepository.GetByIdAsync(request.LocationId, cancellationToken)).ToModel();
+            return (await _locationRepository.GetByIdAsync(request.LocationId)).ToModel();
         }
     }
 }
