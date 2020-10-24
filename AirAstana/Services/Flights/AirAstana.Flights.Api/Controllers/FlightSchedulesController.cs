@@ -6,6 +6,7 @@ using AirAstana.Flights.Api.Mappers;
 using AirAstana.Flights.Api.Models.Common;
 using AirAstana.Flights.Api.Models.FlightSchedules;
 using AirAstana.Flights.Api.Models.Requests.FlightSchedules;
+using AirAstana.Flights.Core.Commands.FlightSchedules.AddDelay;
 using AirAstana.Flights.Core.Commands.FlightSchedules.Create;
 using AirAstana.Flights.Core.Commands.FlightSchedules.Delete;
 using AirAstana.Flights.Core.Commands.FlightSchedules.Update;
@@ -72,6 +73,22 @@ namespace AirAstana.Flights.Api.Controllers
         {
             var createdResponse = await Mediator.Send(new CreateFlightScheduleCommand(request.FlightId, request.FlightSchedule.ToCoreModel()));
             return !createdResponse.Success ? this.BadRequestWebResponse(createdResponse.Message) : this.OkWebResponse();
+        }
+
+        /// <summary>
+        ///     Добавить время заддержки рейса.
+        /// </summary>
+        /// <param name="request">Запрос для добавления времени заддержки.</param>
+        /// <returns>WebResponse с http статусом.</returns>
+        // POST api/flightSchedules
+        [HttpPatch("delay")]
+        [SwaggerResponse(200, type: typeof(WebResponse))]
+        [SwaggerResponse(400, type: typeof(WebResponse))]
+        [SwaggerResponse(500, type: typeof(WebResponse))]
+        public async Task<IActionResult> AddDelayFlightSchedule([FromBody] AddDelayFlightScheduleRequest request)
+        {
+            var response = await Mediator.Send(new AddDelayFlightScheduleCommand(request.FlightScheduleId, request.DelayTicks));
+            return !response.Success ? this.BadRequestWebResponse(response.Message) : this.OkWebResponse();
         }
 
         /// <summary>
