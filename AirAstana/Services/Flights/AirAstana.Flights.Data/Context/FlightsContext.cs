@@ -14,7 +14,6 @@ namespace AirAstana.Flights.Data.Context
     {
         public FlightsContext([NotNull] DbContextOptions options) : base(options)
         {
-            SeedDataExtension.SeedData(this);
         }
 
         protected FlightsContext()

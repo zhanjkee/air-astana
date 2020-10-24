@@ -1,6 +1,7 @@
 ﻿using System;
 using AirAstana.Flights.Data.Abstract;
 using AirAstana.Flights.Data.Context;
+using AirAstana.Flights.Data.Extensions;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,7 @@ namespace AirAstana.Flights.Data.SqlServer
 
             var context = new SqlServerDbContext(optionsBuilder.Options);
             context.Database.Migrate();
+            SeedDataExtension.SeedData(context);
             return context;
         }
     }
