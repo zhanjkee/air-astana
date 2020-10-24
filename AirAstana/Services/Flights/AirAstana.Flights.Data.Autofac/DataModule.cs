@@ -14,13 +14,13 @@ namespace AirAstana.Flights.Data.Autofac
         {
             builder.Register(x =>
             {
-                var configuration = x.Resolve<FlightsServiceOptions>();
+                var configuration = x.Resolve<FlightsOptions>();
                 return new SqlServerDbContextFactory(configuration.ConnectionString);
             }).As<IDbContextFactory>().InstancePerLifetimeScope();
 
             builder.Register(x =>
             {
-                var configuration = x.Resolve<FlightsServiceOptions>();
+                var configuration = x.Resolve<FlightsOptions>();
                 var dbContextFactory = new SqlServerDbContextFactory(configuration.ConnectionString);
                 return dbContextFactory.Create();
             }).As<FlightsContext>().InstancePerLifetimeScope();

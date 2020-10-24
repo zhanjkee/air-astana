@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="6.0.0" />
+		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.9" />
+		<PackageReference Include="OpenIddict.Validation.AspNetCore" Version="3.0.0-beta5.20503.76" />
+		<PackageReference Include="OpenIddict.Validation.ServerIntegration" Version="3.0.0-beta5.20503.76" />
+		<PackageReference Include="OpenIddict.Validation.SystemNetHttp" Version="3.0.0-beta5.20503.76" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.6.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Shared\AirAstana.Shared\AirAstana.Shared.csproj" />
+	  <ProjectReference Include="..\..\Auth\AirAstana.Auth.Options\AirAstana.Auth.Options.csproj" />
+	  <ProjectReference Include="..\AirAstana.Flights.Api.Models\AirAstana.Flights.Api.Models.csproj" />
+	  <ProjectReference Include="..\AirAstana.Flights.Api\AirAstana.Flights.Api.csproj" />
+	  <ProjectReference Include="..\AirAstana.Flights.Core.Autofac\AirAstana.Flights.Core.Autofac.csproj" />
+	  <ProjectReference Include="..\AirAstana.Flights.Data.Autofac\AirAstana.Flights.Data.Autofac.csproj" />
+	</ItemGroup>
+
+</Project>

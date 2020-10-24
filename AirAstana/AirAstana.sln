@@ -54,6 +54,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Flights.Api", "Services\Flights\AirAstana.Flights.Api\AirAstana.Flights.Api.csproj", "{8DA4DFB7-8034-4446-96FA-BF98ED126F01}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Flights.Api.Models", "Services\Flights\AirAstana.Flights.Api.Models\AirAstana.Flights.Api.Models.csproj", "{73BC1187-52BC-4C2F-8AD1-DFDFFE56CE19}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Auth.Constants", "Services\Auth\AirAstana.Auth.Constants\AirAstana.Auth.Constants.csproj", "{42E3E4A7-0C72-4B5F-99DC-F604F105C38D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Auth.Api.Client", "Services\Auth\AirAstana.Auth.Api.Client\AirAstana.Auth.Api.Client.csproj", "{6AF0C699-CBA1-478E-BCF3-1209C1047F32}"
@@ -65,6 +66,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{2B82B459-8874-40A3-A204-BBE24C22D2D2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{208B9086-2B80-4F24-BF42-00DDE189BD30}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Flights.Service", "Services\Flights\AirAstana.Flights.Service\AirAstana.Flights.Service.csproj", "{9052CD9D-EB32-470E-8907-F05AC9A4DF7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -152,6 +155,10 @@ Global
 		{8CBFA83B-FC48-40A1-A21D-069AF51C7407}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CBFA83B-FC48-40A1-A21D-069AF51C7407}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CBFA83B-FC48-40A1-A21D-069AF51C7407}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9052CD9D-EB32-470E-8907-F05AC9A4DF7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9052CD9D-EB32-470E-8907-F05AC9A4DF7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9052CD9D-EB32-470E-8907-F05AC9A4DF7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9052CD9D-EB32-470E-8907-F05AC9A4DF7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -187,6 +194,7 @@ Global
 		{3A7B3D3B-0C1F-4E54-AD06-3F2B0AC7F754} = {28769D42-D00F-4975-8541-28E9656775B9}
 		{2B82B459-8874-40A3-A204-BBE24C22D2D2} = {28769D42-D00F-4975-8541-28E9656775B9}
 		{208B9086-2B80-4F24-BF42-00DDE189BD30} = {28769D42-D00F-4975-8541-28E9656775B9}
+		{9052CD9D-EB32-470E-8907-F05AC9A4DF7A} = {232830AD-701C-42F4-9EA5-D4F311F78E94}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D273FF58-B7B8-4208-BD66-79BF76404633}
