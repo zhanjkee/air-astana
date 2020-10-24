@@ -9,7 +9,7 @@ namespace AirAstana.Flights.Data.SqlServer
         {
             // TODO: Добавить возможность чтения connectionString из appsettings.json файла.
             var optionsBuilder = new DbContextOptionsBuilder<SqlServerDbContext>()
-                .UseSqlServer("Data Source=(local);Database=airastana_identity;Integrated Security=True");
+                .UseSqlServer("Data Source=(local);Database=airastana_flight_v1;Integrated Security=True");
 
             return new SqlServerDbContext(optionsBuilder.Options);
         }
