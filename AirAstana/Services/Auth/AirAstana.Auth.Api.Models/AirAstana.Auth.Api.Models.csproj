@@ -1,16 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>C:\Workspace\air-astana-v1\AirAstana\Services\Auth\AirAstana.Auth.Api.Models\AirAstana.Auth.Api.Models.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
-    <PackageReference Include="OpenIddict.Abstractions" Version="2.0.1" />
+    <PackageReference Include="OpenIddict.Abstractions" Version="3.0.0-beta5.20503.76" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AirAstana.Auth.Constants\AirAstana.Auth.Constants.csproj" />
   </ItemGroup>
 
   <ItemGroup>

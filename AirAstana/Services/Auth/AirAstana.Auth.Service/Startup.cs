@@ -1,3 +1,4 @@
+using System;
 using AirAstana.Auth.Data;
 using AirAstana.Auth.Data.Entities;
 using AirAstana.Auth.Options;
@@ -12,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace AirAstana.Auth.Service
@@ -107,8 +109,8 @@ namespace AirAstana.Auth.Service
 
             // Register the Identity services.
             services.AddIdentity<UserEntity, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddDefaultTokenProviders();
 
             // Configure Identity to use the same JWT claims as OpenIddict instead
             // of the legacy WS-Federation claims it uses by default (ClaimTypes),
@@ -135,17 +137,20 @@ namespace AirAstana.Auth.Service
                 .AddServer(options =>
                 {
                     // Enable the token endpoint.
-                    options.SetTokenEndpointUris("/connect/token");
+                    options.SetTokenEndpointUris("/connect/token")
+                           .SetUserinfoEndpointUris("/connect/userinfo")
+                           .SetLogoutEndpointUris("/connect/logout");
 
                     // Enable the password and the refresh token flows.
                     options.AllowPasswordFlow()
                            .AllowRefreshTokenFlow();
 
                     // Accept anonymous clients (i.e clients that don't send a client_id).
+                    // NOTE: Не стал добавлять скоупы для FlightService.
                     options.AcceptAnonymousClients();
 
                     // Register the signing and encryption credentials.
-                    options.AddDevelopmentEncryptionCertificate()
+                    options.AddEncryptionKey(new SymmetricSecurityKey(Convert.FromBase64String(AuthOptions.SecretKey)))
                            .AddDevelopmentSigningCertificate();
 
                     // Register the ASP.NET Core host and configure the ASP.NET Core-specific options.
@@ -163,8 +168,6 @@ namespace AirAstana.Auth.Service
                     // Register the ASP.NET Core host.
                     options.UseAspNetCore();
                 });
-
-            //services.AddAuthorization();
         }
     }
 }

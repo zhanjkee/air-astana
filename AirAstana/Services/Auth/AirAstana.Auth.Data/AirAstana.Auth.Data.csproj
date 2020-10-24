@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\AirAstana.Shared\AirAstana.Shared.csproj" />
+    <ProjectReference Include="..\AirAstana.Auth.Constants\AirAstana.Auth.Constants.csproj" />
   </ItemGroup>
 
 </Project>

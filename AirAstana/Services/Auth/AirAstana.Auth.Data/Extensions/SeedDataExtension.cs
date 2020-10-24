@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
+using AirAstana.Auth.Constants;
 using AirAstana.Auth.Data.Entities;
 
 namespace AirAstana.Auth.Data.Extensions
@@ -21,14 +22,14 @@ namespace AirAstana.Auth.Data.Extensions
                 new IdentityRole
                 {
                     Id = adminRoleId,
-                    Name = "Administrator",
-                    NormalizedName = "Administrator"
+                    Name = AuthConstants.Roles.Administrator,
+                    NormalizedName = AuthConstants.Roles.Administrator
                 },
                 new IdentityRole
                 {
                     Id = moderatorRoleId,
-                    Name = "Moderator",
-                    NormalizedName = "Moderator"
+                    Name = AuthConstants.Roles.Moderator,
+                    NormalizedName = AuthConstants.Roles.Moderator
                 }
             });
 
