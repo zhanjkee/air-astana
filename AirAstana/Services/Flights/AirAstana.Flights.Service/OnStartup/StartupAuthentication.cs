@@ -18,7 +18,7 @@ namespace AirAstana.Flights.Service.OnStartup
             services.AddOpenIddict()
                 .AddValidation(options =>
                 {
-                    options.SetIssuer(new Uri(authOptions.WebAddress));
+                    options.SetIssuer(new Uri(authOptions.Issuer));
                     options.AddEncryptionKey(new SymmetricSecurityKey(Convert.FromBase64String(authOptions.SecretKey)));
                     options.UseAspNetCore();
                     options.UseSystemNetHttp();

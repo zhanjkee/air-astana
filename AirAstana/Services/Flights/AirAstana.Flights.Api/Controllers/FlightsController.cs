@@ -11,7 +11,9 @@ using AirAstana.Flights.Core.Commands.Flights.Delete;
 using AirAstana.Flights.Core.Commands.Flights.Update;
 using AirAstana.Flights.Core.Queries.Flights.GetAll;
 using AirAstana.Flights.Core.Queries.Flights.GetById;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OpenIddict.Validation.AspNetCore;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace AirAstana.Flights.Api.Controllers
@@ -19,6 +21,9 @@ namespace AirAstana.Flights.Api.Controllers
     /// <summary>
     ///     Контроллер рейсов.
     /// </summary>
+    [Authorize(Roles = "Administrator", AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+    [Route("api/flights")]
+    [ApiController]
     public class FlightsController : BaseController
     {
         /// <summary>
@@ -26,12 +31,11 @@ namespace AirAstana.Flights.Api.Controllers
         /// </summary>
         /// <returns>Список рейсов.</returns>
         // GET api/flights
-        [
-            HttpGet,
-            SwaggerResponse(200, type: typeof(WebResponse<IEnumerable<FlightModel>>)),
-            SwaggerResponse(500, type: typeof(WebResponse))
-        ]
-        public async Task<IActionResult> Get()
+        [AllowAnonymous]
+        [HttpGet]
+        [SwaggerResponse(200, type: typeof(WebResponse<IEnumerable<FlightModel>>))]
+        [SwaggerResponse(500, type: typeof(WebResponse))]
+        public async Task<IActionResult> GetFlights()
         {
             return this.OkWebResponse((await Mediator.Send(new GetFlightsQuery())).Select(x => x.ToApiModel()).ToList());
         }
@@ -39,17 +43,16 @@ namespace AirAstana.Flights.Api.Controllers
         /// <summary>
         ///     Получить рейс по идентификатору.
         /// </summary>
-        /// <param name="flightId"></param>
+        /// <param name="id"></param>
         /// <returns>Данные о рейсе.</returns>
         // GET api/flights/id
-        [
-            HttpGet,
-            SwaggerResponse(200, type: typeof(WebResponse<FlightModel>)),
-            SwaggerResponse(500, type: typeof(WebResponse))
-        ]
-        public async Task<IActionResult> Get([FromQuery] int flightId)
+        [AllowAnonymous]
+        [HttpGet("id")]
+        [SwaggerResponse(200, type: typeof(WebResponse<FlightModel>))]
+        [SwaggerResponse(500, type: typeof(WebResponse))]
+        public async Task<IActionResult> GetFlightById([FromQuery] int id)
         {
-            return this.OkWebResponse((await Mediator.Send(new GetFlightQuery(flightId))).ToApiModel());
+            return this.OkWebResponse((await Mediator.Send(new GetFlightQuery(id))).ToApiModel());
         }
 
         /// <summary>
@@ -58,13 +61,11 @@ namespace AirAstana.Flights.Api.Controllers
         /// <param name="request">Запрос на создание рейса.</param>
         /// <returns>WebResponse с http статусом.</returns>
         // POST api/flights
-        [
-            HttpPost,
-            SwaggerResponse(200, type: typeof(WebResponse)),
-            SwaggerResponse(400, type: typeof(WebResponse)),
-            SwaggerResponse(500, type: typeof(WebResponse))
-        ]
-        public async Task<IActionResult> Create([FromBody] CreateFlightRequest request)
+        [HttpPost]
+        [SwaggerResponse(200, type: typeof(WebResponse))]
+        [SwaggerResponse(400, type: typeof(WebResponse))]
+        [SwaggerResponse(500, type: typeof(WebResponse))]
+        public async Task<IActionResult> CreateFlight([FromBody] CreateFlightRequest request)
         {
             var createdResponse = await Mediator.Send(new CreateFlightCommand(request.Flight.ToCoreModel()));
             return !createdResponse.Success ? this.BadRequestWebResponse(createdResponse.Message) : this.OkWebResponse();
@@ -76,13 +77,11 @@ namespace AirAstana.Flights.Api.Controllers
         /// <param name="request">Запрос на изменения данных рейса.</param>
         /// <returns>WebResponse с http статусом.</returns>
         // PUT api/flights
-        [
-            HttpPut,
-            SwaggerResponse(200, type: typeof(WebResponse)),
-            SwaggerResponse(400, type: typeof(WebResponse)),
-            SwaggerResponse(500, type: typeof(WebResponse))
-        ]
-        public async Task<IActionResult> Update([FromBody] UpdateFlightRequest request)
+        [HttpPut]
+        [SwaggerResponse(200, type: typeof(WebResponse))]
+        [SwaggerResponse(400, type: typeof(WebResponse))]
+        [SwaggerResponse(500, type: typeof(WebResponse))]
+        public async Task<IActionResult> UpdateFlight([FromBody] UpdateFlightRequest request)
         {
             var updatedResponse = await Mediator.Send(new UpdateFlightCommand(request.Flight.ToCoreModel()));
             return !updatedResponse.Success ? this.BadRequestWebResponse(updatedResponse.Message) : this.OkWebResponse();
@@ -91,18 +90,16 @@ namespace AirAstana.Flights.Api.Controllers
         /// <summary>
         ///     Удалить рейс.
         /// </summary>
-        /// <param name="flightId">ID рейса.</param>
+        /// <param name="id">ID рейса.</param>
         /// <returns>WebResponse с http статусом.</returns>
         // DELETE api/flights
-        [
-            HttpDelete,
-            SwaggerResponse(200, type: typeof(WebResponse)),
-            SwaggerResponse(400, type: typeof(WebResponse)),
-            SwaggerResponse(500, type: typeof(WebResponse))
-        ]
-        public async Task<IActionResult> Update([FromQuery] int flightId)
+        [HttpDelete("id")]
+        [SwaggerResponse(200, type: typeof(WebResponse))]
+        [SwaggerResponse(400, type: typeof(WebResponse))]
+        [SwaggerResponse(500, type: typeof(WebResponse))]
+        public async Task<IActionResult> DeleteFlight([FromQuery] int id)
         {
-            var deletedResponse = await Mediator.Send(new DeleteFlightCommand(flightId));
+            var deletedResponse = await Mediator.Send(new DeleteFlightCommand(id));
             return !deletedResponse.Success ? this.BadRequestWebResponse(deletedResponse.Message) : this.OkWebResponse();
         }
     }

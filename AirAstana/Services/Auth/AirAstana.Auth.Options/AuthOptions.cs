@@ -13,6 +13,11 @@
         public string WebAddress { get; set; }
 
         /// <summary>
+        ///     Gets or sets the issuer.
+        /// </summary>
+        public string Issuer { get; set; }
+
+        /// <summary>
         ///     Gets or sets the connection string.
         /// </summary>
         public string ConnectionString { get; set; }
