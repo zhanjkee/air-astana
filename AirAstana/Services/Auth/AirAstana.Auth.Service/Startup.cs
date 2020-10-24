@@ -109,8 +109,8 @@ namespace AirAstana.Auth.Service
 
             // Register the Identity services.
             services.AddIdentity<UserEntity, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddDefaultTokenProviders();
 
             // Configure Identity to use the same JWT claims as OpenIddict instead
             // of the legacy WS-Federation claims it uses by default (ClaimTypes),
@@ -138,7 +138,8 @@ namespace AirAstana.Auth.Service
                 {
                     // Enable the token endpoint.
                     options.SetTokenEndpointUris("/connect/token")
-                        .SetUserinfoEndpointUris("/connect/userinfo");
+                           .SetUserinfoEndpointUris("/connect/userinfo")
+                           .SetLogoutEndpointUris("/connect/logout");
 
                     // Enable the password and the refresh token flows.
                     options.AllowPasswordFlow()
