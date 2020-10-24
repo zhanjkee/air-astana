@@ -5,10 +5,10 @@ namespace AirAstana.Flights.Api.Mappers
 {
     public static class FlightScheduleMapper
     {
-        public static FlightScheduleModel ToApiModel(this FlightSchedule flightSchedule)
+        public static FlightScheduleModel ToApiModel(this FlightSchedule flightSchedule, bool mapFlight = true)
         {
             if (flightSchedule == null) return null;
-            return new FlightScheduleModel
+            var result = new FlightScheduleModel
             {
                 Id = flightSchedule.Id,
                 Delay = flightSchedule.Delay,
@@ -17,6 +17,9 @@ namespace AirAstana.Flights.Api.Mappers
                 Duration = flightSchedule.Duration,
                 FlightId = flightSchedule.FlightId
             };
+
+            if (mapFlight) result.Flight = flightSchedule.Flight.ToApiModel(false);
+            return result;
         }
 
         public static FlightSchedule ToCoreModel(this FlightScheduleModel flightSchedule)

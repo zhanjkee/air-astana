@@ -19,18 +19,22 @@ namespace AirAstana.Flights.Core.Mappers
             };
         }
 
-        public static FlightSchedule ToModel(this FlightScheduleEntity flightSchedule)
+        public static FlightSchedule ToModel(this FlightScheduleEntity flightSchedule, bool mapFlight = true)
         {
             if (flightSchedule == null) return null;
-            return new FlightSchedule
+            var result = new FlightSchedule
             {
                 Id = flightSchedule.Id,
                 Delay = flightSchedule.Delay,
                 ActualDeparture = flightSchedule.ActualDeparture,
                 Departure = flightSchedule.Departure,
                 Duration = flightSchedule.Duration,
-                FlightId = flightSchedule.FlightId
+                FlightId = flightSchedule.FlightId,
             };
+
+            if (mapFlight) result.Flight = flightSchedule.Flight.ToModel(false);
+
+            return result;
         }
     }
 }

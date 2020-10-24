@@ -18,17 +18,20 @@ namespace AirAstana.Flights.Core.Mappers
             };
         }
 
-        public static Flight ToModel(this FlightEntity flight)
+        public static Flight ToModel(this FlightEntity flight, bool mapSchedule = true)
         {
             if (flight == null) return null;
 
-            return new Flight
+            var result = new Flight
             {
                 Destination = flight.Destination.ToModel(),
                 FlightNumber = flight.FlightNumber,
                 Source = flight.Source.ToModel(),
-                Schedules = flight.Schedules?.Select(x => x?.ToModel()).ToList()
             };
+
+            if (mapSchedule) result.Schedules = flight.Schedules?.Select(x => x?.ToModel(false)).ToList();
+
+            return result;
         }
     }
 }

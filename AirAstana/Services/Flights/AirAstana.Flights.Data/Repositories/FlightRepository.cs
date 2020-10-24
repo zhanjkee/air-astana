@@ -22,6 +22,17 @@ namespace AirAstana.Flights.Data.Repositories
         }
 
         /// <summary>
+        ///     Gets the flight by identifier asynchronous.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        public async Task<FlightEntity> GetFlightByIdAsync(int id, CancellationToken cancellationToken = default)
+        {
+            return (await GetAsync(new FlightSpecification(id), cancellationToken)).SingleOrDefault();
+        }
+
+        /// <summary>
         ///     Gets the flight schedules.
         /// </summary>
         /// <param name="cancellationToken">The cancellation token.</param>

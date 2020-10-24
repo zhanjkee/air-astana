@@ -10,6 +10,15 @@ namespace AirAstana.Flights.Core.Interfaces.Repositories
     public interface IFlightRepository : IRepository<FlightEntity>, IDisposable
     {
         /// <summary>
+        ///     Gets the flight by identifier asynchronous.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        Task<FlightEntity> GetFlightByIdAsync(int id, CancellationToken cancellationToken = default);
+
+
+        /// <summary>
         ///     Gets the flight schedules.
         /// </summary>
         /// <param name="cancellationToken">The cancellation token.</param>

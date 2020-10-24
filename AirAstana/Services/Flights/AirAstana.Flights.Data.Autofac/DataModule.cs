@@ -26,6 +26,7 @@ namespace AirAstana.Flights.Data.Autofac
             }).As<FlightsContext>().InstancePerLifetimeScope();
 
             builder.RegisterType<FlightRepository>().As<IFlightRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<FlightScheduleRepository>().As<IFlightScheduleRepository>().InstancePerLifetimeScope();
             builder.RegisterType<LocationRepository>().As<ILocationRepository>().InstancePerLifetimeScope();
         }
     }

@@ -11,16 +11,16 @@ namespace AirAstana.Flights.Core.Queries.FlightSchedules.GetById
 {
     public sealed class GetFlightScheduleQueryHandler : IRequestHandler<GetFlightScheduleQuery, FlightSchedule>
     {
-        private readonly IFlightRepository _flightRepository;
+        private readonly IFlightScheduleRepository _flightScheduleRepository;
 
-        public GetFlightScheduleQueryHandler([NotNull] IFlightRepository flightRepository)
+        public GetFlightScheduleQueryHandler([NotNull] IFlightScheduleRepository flightScheduleRepository)
         {
-            _flightRepository = flightRepository ?? throw new ArgumentNullException(nameof(flightRepository));
+            _flightScheduleRepository = flightScheduleRepository ?? throw new ArgumentNullException(nameof(flightScheduleRepository));
         }
 
         public async Task<FlightSchedule> Handle(GetFlightScheduleQuery request, CancellationToken cancellationToken)
         {
-            return (await _flightRepository.GetFlightScheduleByIdAsync(request.FlightScheduleId)).ToModel();
+            return (await _flightScheduleRepository.GetFlightScheduleByIdAsync(request.FlightScheduleId, cancellationToken)).ToModel();
         }
     }
 }

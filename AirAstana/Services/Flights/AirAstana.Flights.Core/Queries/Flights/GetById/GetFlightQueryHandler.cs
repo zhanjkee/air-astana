@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AirAstana.Flights.Core.Interfaces.Repositories;
@@ -20,7 +21,7 @@ namespace AirAstana.Flights.Core.Queries.Flights.GetById
 
         public async Task<Flight> Handle(GetFlightQuery request, CancellationToken cancellationToken)
         {
-            return (await _flightRepository.GetByIdAsync(request.FlightId)).ToModel();
+            return (await _flightRepository.GetFlightByIdAsync(request.FlightId, cancellationToken)).ToModel();
         }
     }
 }
