@@ -1,3 +1,4 @@
+using System;
 using AirAstana.Auth.Data;
 using AirAstana.Auth.Data.Entities;
 using AirAstana.Auth.Options;
@@ -12,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace AirAstana.Auth.Service
@@ -147,7 +149,7 @@ namespace AirAstana.Auth.Service
                     options.AcceptAnonymousClients();
 
                     // Register the signing and encryption credentials.
-                    options.AddDevelopmentEncryptionCertificate()
+                    options.AddEncryptionKey(new SymmetricSecurityKey(Convert.FromBase64String(AuthOptions.SecretKey)))
                            .AddDevelopmentSigningCertificate();
 
                     // Register the ASP.NET Core host and configure the ASP.NET Core-specific options.
