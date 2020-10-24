@@ -10,7 +10,11 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
-    <PackageReference Include="OpenIddict.Abstractions" Version="2.0.1" />
+    <PackageReference Include="OpenIddict.Abstractions" Version="3.0.0-beta5.20503.76" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AirAstana.Auth.Constants\AirAstana.Auth.Constants.csproj" />
   </ItemGroup>
 
   <ItemGroup>

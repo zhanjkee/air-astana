@@ -135,13 +135,15 @@ namespace AirAstana.Auth.Service
                 .AddServer(options =>
                 {
                     // Enable the token endpoint.
-                    options.SetTokenEndpointUris("/connect/token");
+                    options.SetTokenEndpointUris("/connect/token")
+                        .SetUserinfoEndpointUris("/connect/userinfo");
 
                     // Enable the password and the refresh token flows.
                     options.AllowPasswordFlow()
                            .AllowRefreshTokenFlow();
 
                     // Accept anonymous clients (i.e clients that don't send a client_id).
+                    // NOTE: Не стал добавлять скоупы для FlightService.
                     options.AcceptAnonymousClients();
 
                     // Register the signing and encryption credentials.
@@ -163,8 +165,6 @@ namespace AirAstana.Auth.Service
                     // Register the ASP.NET Core host.
                     options.UseAspNetCore();
                 });
-
-            //services.AddAuthorization();
         }
     }
 }

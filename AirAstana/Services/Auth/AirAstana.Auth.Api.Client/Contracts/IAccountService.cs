@@ -11,5 +11,10 @@ namespace AirAstana.Auth.Api.Client.Contracts
         ///     Регистрация нового пользователя.
         /// </summary>
         Task<RegisterUserResponse> RegisterUserAsync(RegisterUserRequest request, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        ///     Получить UserInfo.
+        /// </summary>
+        Task<UserInfoResponse> GetUserInfoAsync(AuthTokenResponse authToken, CancellationToken cancellationToken = default);
     }
 }

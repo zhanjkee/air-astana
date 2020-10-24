@@ -8,19 +8,16 @@ using AirAstana.Auth.Api.Client.Contracts;
 using AirAstana.Auth.Api.Models.Requests;
 using AirAstana.Auth.Api.Models.Responses;
 using AirAstana.Shared.Extensions;
+using OpenIddict.Abstractions;
 
 namespace AirAstana.Auth.Api.Client.Http.Implementations
 {
     public class AuthorizationService : IAuthorizationService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _webAddress;
-        public AuthorizationService(HttpClient httpClient, string webAddress)
+        public AuthorizationService(HttpClient httpClient)
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-            if (string.IsNullOrEmpty(webAddress)) throw new ArgumentNullException(nameof(webAddress));
-
-            _webAddress = webAddress;
         }
 
         /// <summary>
@@ -31,7 +28,7 @@ namespace AirAstana.Auth.Api.Client.Http.Implementations
             AuthTokenResponse payload;
             try
             {
-                var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{_webAddress}/connect/token")
+                var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"/connect/token")
                 {
                     Content = new FormUrlEncodedContent(request.ToKeyValue())
                 };
@@ -42,8 +39,9 @@ namespace AirAstana.Auth.Api.Client.Http.Implementations
                 {
                     responseMessage.EnsureSuccessStatusCode();
 
-                    payload = await responseMessage.Content.ReadFromJsonAsync<AuthTokenResponse>(
+                    var openIddictResponse = await responseMessage.Content.ReadFromJsonAsync<OpenIddictResponse>(
                         cancellationToken: cancellationToken);
+                    payload= new AuthTokenResponse(openIddictResponse);
                 }
             }
             catch (Exception exception)
@@ -61,7 +59,7 @@ namespace AirAstana.Auth.Api.Client.Http.Implementations
             AuthTokenResponse payload;
             try
             {
-                var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{_webAddress}/connect/token")
+                var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"/connect/token")
                 {
                     Content = new FormUrlEncodedContent(request.ToKeyValue())
                 };
@@ -72,8 +70,9 @@ namespace AirAstana.Auth.Api.Client.Http.Implementations
                 {
                     responseMessage.EnsureSuccessStatusCode();
 
-                    payload = await responseMessage.Content.ReadFromJsonAsync<AuthTokenResponse>(
+                    var openIddictResponse = await responseMessage.Content.ReadFromJsonAsync<OpenIddictResponse>(
                         cancellationToken: cancellationToken);
+                    payload = new AuthTokenResponse(openIddictResponse);
                 }
             }
             catch (Exception exception)

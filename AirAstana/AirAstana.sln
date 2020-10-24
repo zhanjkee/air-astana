@@ -21,11 +21,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{EDB874
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Shared", "Shared\AirAstana.Shared\AirAstana.Shared.csproj", "{224C8FFA-AE4B-4A09-A547-EE9001E85276}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirAstana.Auth.Constants", "Services\Auth\AirAstana.Auth.Constants\AirAstana.Auth.Constants.csproj", "{42E3E4A7-0C72-4B5F-99DC-F604F105C38D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Auth.Constants", "Services\Auth\AirAstana.Auth.Constants\AirAstana.Auth.Constants.csproj", "{42E3E4A7-0C72-4B5F-99DC-F604F105C38D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirAstana.Auth.Api.Client", "Services\Auth\AirAstana.Auth.Api.Client\AirAstana.Auth.Api.Client.csproj", "{6AF0C699-CBA1-478E-BCF3-1209C1047F32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Auth.Api.Client", "Services\Auth\AirAstana.Auth.Api.Client\AirAstana.Auth.Api.Client.csproj", "{6AF0C699-CBA1-478E-BCF3-1209C1047F32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirAstana.Auth.Api.Client.Http", "Services\Auth\AirAstana.Auth.Api.Client.Http\AirAstana.Auth.Api.Client.Http.csproj", "{8CBFA83B-FC48-40A1-A21D-069AF51C7407}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Auth.Api.Client.Http", "Services\Auth\AirAstana.Auth.Api.Client.Http\AirAstana.Auth.Api.Client.Http.csproj", "{8CBFA83B-FC48-40A1-A21D-069AF51C7407}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{3A7B3D3B-0C1F-4E54-AD06-3F2B0AC7F754}"
 EndProject

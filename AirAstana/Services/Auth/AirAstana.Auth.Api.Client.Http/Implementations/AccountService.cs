@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using AirAstana.Auth.Api.Client.Contracts;
@@ -13,13 +15,9 @@ namespace AirAstana.Auth.Api.Client.Http.Implementations
     public  class AccountService : IAccountService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _webAddress;
-        public AccountService(HttpClient httpClient, string webAddress)
+        public AccountService(HttpClient httpClient)
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-            if (string.IsNullOrEmpty(webAddress)) throw new ArgumentNullException(nameof(webAddress));
-
-            _webAddress = webAddress;
         }
 
         /// <summary>
@@ -31,7 +29,7 @@ namespace AirAstana.Auth.Api.Client.Http.Implementations
             try
             {
                 using (var responseMessage =
-                        await _httpClient.PostAsJsonAsync($"{_webAddress}/api/account", request, cancellationToken))
+                        await _httpClient.PostAsJsonAsync($"/api/account", request, cancellationToken))
                 {
                     // Ignore 409 responses, as they indicate that the account already exists.
                     if (responseMessage.StatusCode == HttpStatusCode.Conflict)
@@ -42,6 +40,42 @@ namespace AirAstana.Auth.Api.Client.Http.Implementations
                     responseMessage.EnsureSuccessStatusCode();
 
                     payload = await responseMessage.Content.ReadFromJsonAsync<RegisterUserResponse>(cancellationToken: cancellationToken);
+                }
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+
+            return payload;
+        }
+
+        /// <summary>
+        ///     Получить UserInfo.
+        /// </summary>
+        public async Task<UserInfoResponse> GetUserInfoAsync(AuthTokenResponse authToken, CancellationToken cancellationToken = default)
+        {
+            var payload = new UserInfoResponse(string.Empty, false, new Claim[0]);
+            try
+            {
+                var requestMessage =
+                    new HttpRequestMessage(HttpMethod.Get, $"/connect/userinfo");
+
+                requestMessage.Headers.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                if (authToken != null)
+                {
+                    requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authToken.AccessToken);
+                }
+
+                using (var responseMessage = await _httpClient.SendAsync(requestMessage,
+                    HttpCompletionOption.ResponseHeadersRead, cancellationToken))
+                {
+                    responseMessage.EnsureSuccessStatusCode();
+
+                    payload = await responseMessage.Content.ReadFromJsonAsync<UserInfoResponse>(
+                        cancellationToken: cancellationToken);
                 }
             }
             catch (Exception)
