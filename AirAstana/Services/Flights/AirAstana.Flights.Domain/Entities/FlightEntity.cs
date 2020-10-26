@@ -6,7 +6,7 @@ namespace AirAstana.Flights.Domain.Entities
     /// <summary>
     ///     The flight entity.
     /// </summary>
-    public sealed class FlightEntity : EntityBase
+    public class FlightEntity : EntityBase
     {
         /// <summary>
         ///     Gets or sets the flight number.
@@ -14,18 +14,28 @@ namespace AirAstana.Flights.Domain.Entities
         public string FlightNumber { get; set; }
 
         /// <summary>
+        ///     Gets or sets the source identifier.
+        /// </summary>
+        public int SourceId { get; set; }
+
+        /// <summary>
         ///     Gets or sets the source.
         /// </summary>
-        public LocationEntity Source { get; set; }
+        public virtual LocationEntity Source { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the destination identifier.
+        /// </summary>
+        public int DestinationId { get; set; }
 
         /// <summary>
         ///     Gets or sets the destination.
         /// </summary>
-        public LocationEntity Destination { get; set; }
+        public virtual LocationEntity Destination { get; set; }
 
         /// <summary>
         ///     Gets or sets the schedules.
         /// </summary>
-        public ICollection<FlightScheduleEntity> Schedules { get; set; }
+        public virtual ICollection<FlightScheduleEntity> Schedules { get; set; }
     }
 }

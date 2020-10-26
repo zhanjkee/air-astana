@@ -12,8 +12,11 @@ namespace AirAstana.Flights.Core.Mappers
 
             return new FlightEntity
             {
+                Id = flight.Id,
+                DestinationId = flight.DestinationId,
                 Destination = flight.Destination.ToEntity(),
                 FlightNumber = flight.FlightNumber,
+                SourceId = flight.SourceId,
                 Source = flight.Source.ToEntity()
             };
         }
@@ -24,8 +27,11 @@ namespace AirAstana.Flights.Core.Mappers
 
             var result = new Flight
             {
+                Id = flight.Id,
+                DestinationId = flight.DestinationId,
                 Destination = flight.Destination.ToModel(),
                 FlightNumber = flight.FlightNumber,
+                SourceId = flight.SourceId,
                 Source = flight.Source.ToModel(),
             };
 

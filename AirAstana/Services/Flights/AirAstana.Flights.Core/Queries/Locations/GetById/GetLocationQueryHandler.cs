@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AirAstana.Flights.Core.Interfaces.Repositories;
+using AirAstana.Flights.Core.Interfaces.UoW;
 using AirAstana.Flights.Core.Mappers;
 using AirAstana.Flights.Core.Models.Locations;
 using JetBrains.Annotations;
@@ -11,15 +11,16 @@ namespace AirAstana.Flights.Core.Queries.Locations.GetById
 {
     public sealed class GetLocationQueryHandler : IRequestHandler<GetLocationQuery, Location>
     {
-        private readonly ILocationRepository _locationRepository;
-        public GetLocationQueryHandler([NotNull] ILocationRepository locationRepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public GetLocationQueryHandler([NotNull] IUnitOfWork unitOfWork)
         {
-            _locationRepository = locationRepository ?? throw new ArgumentNullException(nameof(locationRepository));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
         public async Task<Location> Handle(GetLocationQuery request, CancellationToken cancellationToken)
         {
-            return (await _locationRepository.GetByIdAsync(request.LocationId)).ToModel();
+            return (await _unitOfWork.LocationRepository.GetByIdAsync(request.LocationId)).ToModel();
         }
     }
 }

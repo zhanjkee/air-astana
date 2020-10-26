@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace AirAstana.Flights.Api.Models.Locations
 {
@@ -35,6 +36,7 @@ namespace AirAstana.Flights.Api.Models.Locations
         /// <summary>
         ///     Gets or sets the location time zone.
         /// </summary>
+        [JsonIgnore]
         public TimeZoneInfo LocationTimeZone { get; set; }
 
         /// <summary>

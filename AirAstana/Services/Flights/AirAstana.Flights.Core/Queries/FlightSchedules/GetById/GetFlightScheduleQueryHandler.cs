@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AirAstana.Flights.Core.Interfaces.Repositories;
+using AirAstana.Flights.Core.Interfaces.UoW;
 using AirAstana.Flights.Core.Mappers;
 using AirAstana.Flights.Core.Models.FlightSchedules;
 using JetBrains.Annotations;
@@ -11,16 +11,16 @@ namespace AirAstana.Flights.Core.Queries.FlightSchedules.GetById
 {
     public sealed class GetFlightScheduleQueryHandler : IRequestHandler<GetFlightScheduleQuery, FlightSchedule>
     {
-        private readonly IFlightScheduleRepository _flightScheduleRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GetFlightScheduleQueryHandler([NotNull] IFlightScheduleRepository flightScheduleRepository)
+        public GetFlightScheduleQueryHandler([NotNull] IUnitOfWork unitOfWork)
         {
-            _flightScheduleRepository = flightScheduleRepository ?? throw new ArgumentNullException(nameof(flightScheduleRepository));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
         public async Task<FlightSchedule> Handle(GetFlightScheduleQuery request, CancellationToken cancellationToken)
         {
-            return (await _flightScheduleRepository.GetFlightScheduleByIdAsync(request.FlightScheduleId, cancellationToken)).ToModel();
+            return (await _unitOfWork.FlightScheduleRepository.GetByIdAsync(request.FlightScheduleId)).ToModel();
         }
     }
 }

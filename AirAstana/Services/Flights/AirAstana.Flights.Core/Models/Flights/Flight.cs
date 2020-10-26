@@ -17,9 +17,19 @@ namespace AirAstana.Flights.Core.Models.Flights
         public string FlightNumber { get; set; }
 
         /// <summary>
+        ///     Gets or sets the source identifier.
+        /// </summary>
+        public int SourceId { get; set; }
+
+        /// <summary>
         ///     Gets or sets the source.
         /// </summary>
         public Location Source { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the destination identifier.
+        /// </summary>
+        public int DestinationId { get; set; }
 
         /// <summary>
         ///     Gets or sets the destination.

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AirAstana.Flights.Data.InMemory;
-using AirAstana.Flights.Data.Repositories;
+using AirAstana.Flights.Data.UoW;
 using Xunit;
 
 namespace AirAstana.Flights.Data.UnitTests.Repositories
@@ -12,15 +12,18 @@ namespace AirAstana.Flights.Data.UnitTests.Repositories
         public async Task AddDelayTimeTests()
         {
             var factory = new InMemoryDbContextFactory();
-            using (var repository = new FlightRepository(factory.Create()))
+            using (var unitOfWork = new UnitOfWork(factory))
             {
-                var firstFlightSchedule = await repository.GetFlightScheduleByIdAsync(1);
+                var repository = unitOfWork.FlightScheduleRepository;
+                var firstFlightSchedule = await repository.GetByIdAsync(1);
                 var delayTimeSpan = new TimeSpan(0, 3, 0, 0);
 
-                await repository.AddDelayTimeAsync(firstFlightSchedule, delayTimeSpan);
-                await repository.SaveChangesAsync();
+                firstFlightSchedule.AddDelayTime(delayTimeSpan);
 
-                firstFlightSchedule = await repository.GetFlightScheduleByIdAsync(1);
+                repository.Update(firstFlightSchedule);
+                await unitOfWork.SaveChangesAsync();
+
+                firstFlightSchedule = await repository.GetByIdAsync(1);
 
                 Assert.True(firstFlightSchedule.Delay.HasValue);
                 Assert.True(delayTimeSpan.Ticks == firstFlightSchedule.Delay.Value.Ticks);
@@ -31,16 +34,17 @@ namespace AirAstana.Flights.Data.UnitTests.Repositories
         public async Task UpdateScheduleTests()
         {
             var factory = new InMemoryDbContextFactory();
-            using (var repository = new FlightRepository(factory.Create()))
+            using (var unitOfWork = new UnitOfWork(factory))
             {
-                var firstFlightSchedule = await repository.GetFlightScheduleByIdAsync(1);
+                var repository = unitOfWork.FlightScheduleRepository;
+                var firstFlightSchedule = await repository.GetByIdAsync(1);
                 var oldDuration = firstFlightSchedule.Duration;
 
                 firstFlightSchedule.Duration = new TimeSpan(0, 5, 55, 55);
-                await repository.UpdateScheduleAsync(firstFlightSchedule);
-                await repository.SaveChangesAsync();
+                repository.Update(firstFlightSchedule);
+                await unitOfWork.SaveChangesAsync();
 
-                firstFlightSchedule = await repository.GetFlightScheduleByIdAsync(1);
+                firstFlightSchedule = await repository.GetByIdAsync(1);
 
                 Assert.True(oldDuration.Ticks != firstFlightSchedule.Duration.Ticks);
             }

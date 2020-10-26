@@ -46,7 +46,7 @@ namespace AirAstana.Flights.Api.Controllers
         /// <returns>Локация.</returns>
         // GET api/locations/id
         [AllowAnonymous]
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         [SwaggerResponse(200, type: typeof(WebResponse<LocationModel>))]
         [SwaggerResponse(500, type: typeof(WebResponse))]
         public async Task<IActionResult> GetLocation(int id)
@@ -91,7 +91,7 @@ namespace AirAstana.Flights.Api.Controllers
         /// </summary>
         /// <returns>Локация.</returns>
         // GET api/locations/id
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         [SwaggerResponse(200, type: typeof(WebResponse))]
         [SwaggerResponse(400, type: typeof(WebResponse))]
         [SwaggerResponse(500, type: typeof(WebResponse))]

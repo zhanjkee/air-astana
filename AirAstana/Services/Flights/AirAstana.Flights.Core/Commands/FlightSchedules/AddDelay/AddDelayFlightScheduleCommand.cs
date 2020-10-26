@@ -1,15 +1,16 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 
 namespace AirAstana.Flights.Core.Commands.FlightSchedules.AddDelay
 {
     public sealed class AddDelayFlightScheduleCommand : IRequest<AddDelayFlightScheduleResponse>
     {
         public int FlightScheduleId { get; set; }
-        public long DelayTicks { get; set; }
-        public AddDelayFlightScheduleCommand(int flightScheduleId, long delayTiks)
+        public TimeSpan Delay { get; set; }
+        public AddDelayFlightScheduleCommand(int flightScheduleId, TimeSpan delay)
         {
             FlightScheduleId = flightScheduleId;
-            DelayTicks = delayTiks;
+            Delay = delay;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace AirAstana.Flights.Api.Models.Requests.FlightSchedules
+﻿using System;
+
+namespace AirAstana.Flights.Api.Models.Requests.FlightSchedules
 {
     /// <summary>
     ///     Запрос для добавления времени заддержки.
@@ -13,6 +15,6 @@
         /// <summary>
         ///     Время заддержки в тиках.
         /// </summary>
-        public long DelayTicks { get; set; }
+        public TimeSpan Delay { get; set; }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AirAstana.Flights.Core.Interfaces.Repositories;
+using AirAstana.Flights.Core.Specifications;
 using AirAstana.Flights.Data.Context;
-using AirAstana.Flights.Data.Specifications;
 using AirAstana.Flights.Domain.Entities;
 using JetBrains.Annotations;
 
@@ -12,22 +13,22 @@ namespace AirAstana.Flights.Data.Repositories
 {
     public class FlightScheduleRepository : EfRepository<FlightScheduleEntity>, IFlightScheduleRepository
     {
-        private readonly FlightsContext _context;
         public FlightScheduleRepository([NotNull] FlightsContext context) : base(context)
         {
-            _context = context;
         }
 
-        public async Task<FlightScheduleEntity> GetFlightScheduleByIdAsync(int id, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<FlightScheduleEntity>> GetFlightSchedulesAsync(DateTime fromDate, DateTime toDate, bool asc = true,
+            CancellationToken cancellationToken = default)
         {
-            return (await GetAsync(new FlightScheduleSpecification(id), cancellationToken)).SingleOrDefault();
-        }
+            var schedules = await GetAsync(
+                new FlightScheduleSpecification(x => x.Departure >= fromDate && x.Departure <= toDate),
+                cancellationToken);
 
+            schedules = asc
+                ? schedules.OrderBy(x => x.Departure)
+                : schedules.OrderByDescending(x => x.Departure);
 
-        public void Dispose()
-        {
-            _context.Dispose();
-            GC.SuppressFinalize(this);
+            return schedules.ToList();
         }
     }
 }

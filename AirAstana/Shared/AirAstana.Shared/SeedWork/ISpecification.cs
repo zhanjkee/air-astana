@@ -21,5 +21,9 @@ namespace AirAstana.Shared.SeedWork
         ///     Gets the include strings.
         /// </summary>
         List<string> IncludeStrings { get; }
+        /// <summary>
+        ///     Gets a value indicating whether [explicit loading].
+        /// </summary>
+        bool ExplicitLoading { get; }
     }
 }

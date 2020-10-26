@@ -15,10 +15,12 @@ namespace AirAstana.Shared.SeedWork
         /// </summary>
         /// <returns></returns>
         Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default);
+
         /// <summary>
         ///     Gets the specified filter.
         /// </summary>
         /// <param name="specification">The specification.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         Task<IEnumerable<TEntity>> GetAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
         /// <summary>
@@ -36,6 +38,7 @@ namespace AirAstana.Shared.SeedWork
         ///     Inserts the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         Task InsertAsync(TEntity entity, CancellationToken cancellationToken = default);
         /// <summary>
         ///     Inserts the range.
@@ -47,11 +50,6 @@ namespace AirAstana.Shared.SeedWork
         /// </summary>
         /// <param name="id">The identifier.</param>
         void Delete(object id);
-        /// <summary>
-        ///     Deletes the specified identifier.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        Task DeleteAsync(object id, CancellationToken cancellationToken = default);
         /// <summary>
         ///     Deletes the specified entity to delete.
         /// </summary>

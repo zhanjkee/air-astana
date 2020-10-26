@@ -1,8 +1,8 @@
-﻿using AirAstana.Flights.Core.Interfaces.Repositories;
+﻿using AirAstana.Flights.Core.Interfaces.UoW;
 using AirAstana.Flights.Data.Abstract;
 using AirAstana.Flights.Data.Context;
-using AirAstana.Flights.Data.Repositories;
 using AirAstana.Flights.Data.SqlServer;
+using AirAstana.Flights.Data.UoW;
 using AirAstana.Flights.Options;
 using Autofac;
 
@@ -25,9 +25,7 @@ namespace AirAstana.Flights.Data.Autofac
                 return dbContextFactory.Create();
             }).As<FlightsContext>().InstancePerLifetimeScope();
 
-            builder.RegisterType<FlightRepository>().As<IFlightRepository>().InstancePerLifetimeScope();
-            builder.RegisterType<FlightScheduleRepository>().As<IFlightScheduleRepository>().InstancePerLifetimeScope();
-            builder.RegisterType<LocationRepository>().As<ILocationRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
         }
     }
 }

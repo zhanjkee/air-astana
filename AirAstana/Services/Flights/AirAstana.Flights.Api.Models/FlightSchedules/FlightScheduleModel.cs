@@ -34,6 +34,11 @@ namespace AirAstana.Flights.Api.Models.FlightSchedules
         public TimeSpan? Delay { get; set; }
 
         /// <summary>
+        ///     Gets or sets the arrival.
+        /// </summary>
+        public DateTime Arrival { get; set; }
+
+        /// <summary>
         ///     Gets or sets the flight identifier.
         /// </summary>
         public int FlightId { get; set; }

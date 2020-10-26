@@ -2,27 +2,28 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
-using AirAstana.Flights.Core.Interfaces.Repositories;
+using AirAstana.Flights.Core.Interfaces.UoW;
 using MediatR;
 
 namespace AirAstana.Flights.Core.Commands.FlightSchedules.Delete
 {
     public sealed class DeleteFlightScheduleCommandHandler : IRequestHandler<DeleteFlightScheduleCommand, DeleteFlightScheduleResponse>
     {
-        private readonly IFlightRepository _flightRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteFlightScheduleCommandHandler([NotNull] IFlightRepository flightRepository)
+        public DeleteFlightScheduleCommandHandler([NotNull] IUnitOfWork unitOfWork)
         {
-            _flightRepository = flightRepository ?? throw new ArgumentNullException(nameof(flightRepository));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
         public async Task<DeleteFlightScheduleResponse> Handle(DeleteFlightScheduleCommand request, CancellationToken cancellationToken)
         {
-            var flightSchedule = await _flightRepository.GetFlightScheduleByIdAsync(request.FlightScheduleId);
+            var flightScheduleRepository = _unitOfWork.FlightScheduleRepository;
+            var flightSchedule = await flightScheduleRepository.GetByIdAsync(request.FlightScheduleId);
             if (flightSchedule == null) return Result(false, $"The flight schedule does not exists by id: {request.FlightScheduleId}");
 
-            _flightRepository.DeleteSchedule(flightSchedule);
-            await _flightRepository.SaveChangesAsync(cancellationToken);
+            flightScheduleRepository.Delete(flightSchedule);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return Result(true);
         }

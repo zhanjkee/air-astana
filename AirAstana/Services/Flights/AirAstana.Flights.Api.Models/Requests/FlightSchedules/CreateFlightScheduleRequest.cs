@@ -8,11 +8,6 @@ namespace AirAstana.Flights.Api.Models.Requests.FlightSchedules
     public sealed class CreateFlightScheduleRequest
     {
         /// <summary>
-        ///     ID рейса.
-        /// </summary>
-        public int FlightId { get; set; }
-
-        /// <summary>
         ///     Данные о расписания рейса.
         /// </summary>
         public FlightScheduleModel FlightSchedule { get; set; }

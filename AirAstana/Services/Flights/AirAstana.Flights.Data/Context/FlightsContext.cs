@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AirAstana.Flights.Data.Extensions;
 using AirAstana.Flights.Domain.Entities;
@@ -38,7 +39,7 @@ namespace AirAstana.Flights.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            var dateTimeUtcConverter = new ValueConverter<DateTime, DateTime>(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
+            var dateTimeUtcConverter = new ValueConverter<DateTime, DateTime>(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Local));
             modelBuilder.UseValueConverterForType<DateTime>(dateTimeUtcConverter);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(FlightsContext).Assembly);
         }
@@ -50,10 +51,10 @@ namespace AirAstana.Flights.Data.Context
         }
 
 
-        public async Task<int> SaveChangesAsync()
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             AddAuitInfo();
-            return await base.SaveChangesAsync();
+            return base.SaveChangesAsync(cancellationToken);
         }
 
         private void AddAuitInfo()

@@ -2,29 +2,31 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
-using AirAstana.Flights.Core.Interfaces.Repositories;
+using AirAstana.Flights.Core.Interfaces.UoW;
 using MediatR;
 
 namespace AirAstana.Flights.Core.Commands.FlightSchedules.AddDelay
 {
     public sealed class AddDelayFlightScheduleCommandHandler : IRequestHandler<AddDelayFlightScheduleCommand, AddDelayFlightScheduleResponse>
     {
-        private readonly IFlightRepository _flightRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AddDelayFlightScheduleCommandHandler([NotNull] IFlightRepository flightRepository)
+        public AddDelayFlightScheduleCommandHandler([NotNull] IUnitOfWork unitOfWork)
         {
-            _flightRepository = flightRepository ?? throw new ArgumentNullException(nameof(flightRepository));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
         public async Task<AddDelayFlightScheduleResponse> Handle(AddDelayFlightScheduleCommand request, CancellationToken cancellationToken)
         {
-            var flightSchedule = await _flightRepository.GetFlightScheduleByIdAsync(request.FlightScheduleId);
+            var flightScheduleRepository = _unitOfWork.FlightScheduleRepository;
+
+            var flightSchedule = await flightScheduleRepository.GetByIdAsync(request.FlightScheduleId);
             if (flightSchedule == null) return Result(false, $"The flight schedule does not exists by id: {request.FlightScheduleId}");
 
-            flightSchedule.Delay = TimeSpan.FromTicks(request.DelayTicks);
+            flightSchedule.Delay = request.Delay;
 
-            await _flightRepository.UpdateScheduleAsync(flightSchedule);
-            await _flightRepository.SaveChangesAsync(cancellationToken);
+            flightScheduleRepository.Update(flightSchedule);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return Result(true);
         }

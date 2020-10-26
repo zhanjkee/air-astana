@@ -50,10 +50,10 @@ namespace AirAstana.Flights.Api.Controllers
         /// <returns>Данные о расписании.</returns>
         // GET api/flightSchedules/id
         [AllowAnonymous]
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         [SwaggerResponse(200, type: typeof(WebResponse<FlightScheduleModel>))]
         [SwaggerResponse(500, type: typeof(WebResponse))]
-        public async Task<IActionResult> GetScheduleById([FromQuery] int id)
+        public async Task<IActionResult> GetScheduleById(int id)
         {
             return this.OkWebResponse((await Mediator.Send(new GetFlightScheduleQuery(id))).ToApiModel());
         }
@@ -71,7 +71,7 @@ namespace AirAstana.Flights.Api.Controllers
         [SwaggerResponse(500, type: typeof(WebResponse))]
         public async Task<IActionResult> CreateFlightSchedule([FromBody] CreateFlightScheduleRequest request)
         {
-            var createdResponse = await Mediator.Send(new CreateFlightScheduleCommand(request.FlightId, request.FlightSchedule.ToCoreModel()));
+            var createdResponse = await Mediator.Send(new CreateFlightScheduleCommand(request.FlightSchedule.ToCoreModel()));
             return !createdResponse.Success ? this.BadRequestWebResponse(createdResponse.Message) : this.OkWebResponse();
         }
 
@@ -87,7 +87,7 @@ namespace AirAstana.Flights.Api.Controllers
         [SwaggerResponse(500, type: typeof(WebResponse))]
         public async Task<IActionResult> AddDelayFlightSchedule([FromBody] AddDelayFlightScheduleRequest request)
         {
-            var response = await Mediator.Send(new AddDelayFlightScheduleCommand(request.FlightScheduleId, request.DelayTicks));
+            var response = await Mediator.Send(new AddDelayFlightScheduleCommand(request.FlightScheduleId, request.Delay));
             return !response.Success ? this.BadRequestWebResponse(response.Message) : this.OkWebResponse();
         }
 
@@ -115,11 +115,11 @@ namespace AirAstana.Flights.Api.Controllers
         /// <returns>WebResponse с http статусом.</returns>
         // DELETE api/flightSchedules
         [Authorize(Roles = "Administrator")]
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         [SwaggerResponse(200, type: typeof(WebResponse))]
         [SwaggerResponse(400, type: typeof(WebResponse))]
         [SwaggerResponse(500, type: typeof(WebResponse))]
-        public async Task<IActionResult> DeleteFlightSchedule([FromQuery] int id)
+        public async Task<IActionResult> DeleteFlightSchedule(int id)
         {
             var deletedResponse = await Mediator.Send(new DeleteFlightScheduleCommand(id));
             return !deletedResponse.Success ? this.BadRequestWebResponse(deletedResponse.Message) : this.OkWebResponse();

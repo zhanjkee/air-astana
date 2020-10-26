@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AirAstana.Flights.Core.Interfaces.Repositories;
+using AirAstana.Flights.Core.Interfaces.UoW;
 using AirAstana.Flights.Core.Mappers;
 using JetBrains.Annotations;
 using MediatR;
@@ -10,16 +10,18 @@ namespace AirAstana.Flights.Core.Commands.Locations.Create
 {
     public sealed class CreateLocationCommandHandler : IRequestHandler<CreateLocationCommand, CreateLocationResponse>
     {
-        private readonly ILocationRepository _locationRepository;
-        public CreateLocationCommandHandler([NotNull]ILocationRepository locationRepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public CreateLocationCommandHandler([NotNull] IUnitOfWork unitOfWork)
         {
-            _locationRepository = locationRepository ?? throw new ArgumentNullException(nameof(locationRepository));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
         public async Task<CreateLocationResponse> Handle(CreateLocationCommand request, CancellationToken cancellationToken)
         {
-            await _locationRepository.InsertAsync(request.Location.ToEntity(), cancellationToken);
-            await _locationRepository.SaveChangesAsync(cancellationToken);
+            var locationRepository = _unitOfWork.LocationRepository;
+            await locationRepository.InsertAsync(request.Location.ToEntity(), cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
             return Result(true);
         }
 

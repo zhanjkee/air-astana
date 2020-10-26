@@ -11,6 +11,7 @@ namespace AirAstana.Flights.Api.Mappers
 
             return new LocationModel
             {
+                Id = location.Id,
                 City = location.City,
                 Country = location.Country,
                 CountryCode = location.CountryCode,
@@ -25,6 +26,7 @@ namespace AirAstana.Flights.Api.Mappers
 
             return new Location
             {
+                Id = location.Id,
                 City = location.City,
                 Country = location.Country,
                 CountryCode = location.CountryCode,

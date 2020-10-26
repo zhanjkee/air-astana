@@ -47,10 +47,10 @@ namespace AirAstana.Flights.Api.Controllers
         /// <returns>Данные о рейсе.</returns>
         // GET api/flights/id
         [AllowAnonymous]
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         [SwaggerResponse(200, type: typeof(WebResponse<FlightModel>))]
         [SwaggerResponse(500, type: typeof(WebResponse))]
-        public async Task<IActionResult> GetFlightById([FromQuery] int id)
+        public async Task<IActionResult> GetFlightById(int id)
         {
             return this.OkWebResponse((await Mediator.Send(new GetFlightQuery(id))).ToApiModel());
         }
@@ -93,11 +93,11 @@ namespace AirAstana.Flights.Api.Controllers
         /// <param name="id">ID рейса.</param>
         /// <returns>WebResponse с http статусом.</returns>
         // DELETE api/flights
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         [SwaggerResponse(200, type: typeof(WebResponse))]
         [SwaggerResponse(400, type: typeof(WebResponse))]
         [SwaggerResponse(500, type: typeof(WebResponse))]
-        public async Task<IActionResult> DeleteFlight([FromQuery] int id)
+        public async Task<IActionResult> DeleteFlight(int id)
         {
             var deletedResponse = await Mediator.Send(new DeleteFlightCommand(id));
             return !deletedResponse.Success ? this.BadRequestWebResponse(deletedResponse.Message) : this.OkWebResponse();

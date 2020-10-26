@@ -12,8 +12,11 @@ namespace AirAstana.Flights.Api.Mappers
 
             return new Flight
             {
+                Id = flight.Id,
+                DestinationId = flight.DestinationId,
                 Destination = flight.Destination.ToCoreModel(),
                 FlightNumber = flight.FlightNumber,
+                SourceId = flight.SourceId,
                 Source = flight.Source.ToCoreModel()
             };
         }
@@ -24,8 +27,11 @@ namespace AirAstana.Flights.Api.Mappers
 
             var result = new FlightModel
             {
+                Id = flight.Id,
+                DestinationId = flight.DestinationId,
                 Destination = flight.Destination.ToApiModel(),
                 FlightNumber = flight.FlightNumber,
+                SourceId = flight.SourceId,
                 Source = flight.Source.ToApiModel(),
             };
 

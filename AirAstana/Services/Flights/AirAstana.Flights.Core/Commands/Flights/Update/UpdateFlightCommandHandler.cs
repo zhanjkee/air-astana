@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AirAstana.Flights.Core.Interfaces.Repositories;
+using AirAstana.Flights.Core.Interfaces.UoW;
 using AirAstana.Flights.Core.Mappers;
 using JetBrains.Annotations;
 using MediatR;
 
 namespace AirAstana.Flights.Core.Commands.Flights.Update
 {
-    public sealed class DeleteFlightCommandHandler : IRequestHandler<UpdateFlightCommand, UpdateFlightResponse>
+    public sealed class UpdateFlightCommandHandler : IRequestHandler<UpdateFlightCommand, UpdateFlightResponse>
     {
-        private readonly IFlightRepository _flightRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteFlightCommandHandler([NotNull]IFlightRepository flightRepository)
+        public UpdateFlightCommandHandler([NotNull] IUnitOfWork unitOfWork)
         {
-            _flightRepository = flightRepository ?? throw new ArgumentNullException(nameof(flightRepository));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
         public async Task<UpdateFlightResponse> Handle(UpdateFlightCommand request, CancellationToken cancellationToken)
         {
-            _flightRepository.Update(request.Flight.ToEntity());
-            await _flightRepository.SaveChangesAsync(cancellationToken);
+            var flightRepository = _unitOfWork.FlightRepository;
+            flightRepository.Update(request.Flight.ToEntity());
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
             return new UpdateFlightResponse(true);
         }
     }

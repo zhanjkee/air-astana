@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
-using AirAstana.Flights.Core.Interfaces.Repositories;
+using AirAstana.Flights.Core.Interfaces.UoW;
 using AirAstana.Flights.Core.Mappers;
 using MediatR;
 
@@ -10,20 +10,21 @@ namespace AirAstana.Flights.Core.Commands.FlightSchedules.Update
 {
     public sealed class UpdateFlightScheduleCommandHandler : IRequestHandler<UpdateFlightScheduleCommand, UpdateFlightScheduleResponse>
     {
-        private readonly IFlightRepository _flightRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UpdateFlightScheduleCommandHandler([NotNull] IFlightRepository flightRepository)
+        public UpdateFlightScheduleCommandHandler([NotNull] IUnitOfWork unitOfWork)
         {
-            _flightRepository = flightRepository ?? throw new ArgumentNullException(nameof(flightRepository));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
         public async Task<UpdateFlightScheduleResponse> Handle(UpdateFlightScheduleCommand request, CancellationToken cancellationToken)
         {
-            var flightSchedule = await _flightRepository.GetFlightScheduleByIdAsync(request.FlightSchedule.Id);
+            var flightScheduleRepository = _unitOfWork.FlightScheduleRepository;
+            var flightSchedule = await flightScheduleRepository.GetByIdAsync(request.FlightSchedule.Id);
             if (flightSchedule == null) return Result(false, $"The flight schedule does not exists by id: {request.FlightSchedule.Id}");
             
-            await _flightRepository.UpdateScheduleAsync(request.FlightSchedule.ToEntity());
-            await _flightRepository.SaveChangesAsync(cancellationToken);
+            flightScheduleRepository.Update(request.FlightSchedule.ToEntity());
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return Result(true);
         }

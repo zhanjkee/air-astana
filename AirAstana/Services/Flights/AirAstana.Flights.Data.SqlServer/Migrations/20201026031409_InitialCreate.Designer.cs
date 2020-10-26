@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirAstana.Flights.Data.SqlServer.Migrations
 {
     [DbContext(typeof(SqlServerDbContext))]
-    [Migration("20201024032041_InitialCreate")]
+    [Migration("20201026031409_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,7 +32,7 @@ namespace AirAstana.Flights.Data.SqlServer.Migrations
                         .HasColumnName("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DestinationId")
+                    b.Property<int>("DestinationId")
                         .HasColumnType("int");
 
                     b.Property<string>("FlightNumber")
@@ -50,7 +50,7 @@ namespace AirAstana.Flights.Data.SqlServer.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<int?>("SourceId")
+                    b.Property<int>("SourceId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -149,12 +149,16 @@ namespace AirAstana.Flights.Data.SqlServer.Migrations
             modelBuilder.Entity("AirAstana.Flights.Domain.Entities.FlightEntity", b =>
                 {
                     b.HasOne("AirAstana.Flights.Domain.Entities.LocationEntity", "Destination")
-                        .WithMany()
-                        .HasForeignKey("DestinationId");
+                        .WithMany("DestinationFlights")
+                        .HasForeignKey("DestinationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("AirAstana.Flights.Domain.Entities.LocationEntity", "Source")
-                        .WithMany()
-                        .HasForeignKey("SourceId");
+                        .WithMany("SourceFlights")
+                        .HasForeignKey("SourceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AirAstana.Flights.Domain.Entities.FlightScheduleEntity", b =>

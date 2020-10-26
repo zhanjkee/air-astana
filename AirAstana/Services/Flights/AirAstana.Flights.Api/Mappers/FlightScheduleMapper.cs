@@ -1,4 +1,6 @@
-﻿using AirAstana.Flights.Api.Models.FlightSchedules;
+﻿using System;
+using AirAstana.Flights.Api.Models.FlightSchedules;
+using AirAstana.Flights.Api.Models.Locations;
 using AirAstana.Flights.Core.Models.FlightSchedules;
 
 namespace AirAstana.Flights.Api.Mappers
@@ -18,7 +20,13 @@ namespace AirAstana.Flights.Api.Mappers
                 FlightId = flightSchedule.FlightId
             };
 
-            if (mapFlight) result.Flight = flightSchedule.Flight.ToApiModel(false);
+            if (mapFlight)
+            {
+                result.Flight = flightSchedule.Flight.ToApiModel(false);
+                result.Arrival = GetArrivalDate(flightSchedule.Departure, flightSchedule.Duration, result.Flight.Source,
+                    result.Flight.Destination);
+            }
+
             return result;
         }
 
@@ -34,6 +42,12 @@ namespace AirAstana.Flights.Api.Mappers
                 Duration = flightSchedule.Duration,
                 FlightId = flightSchedule.FlightId
             };
+        }
+
+        private static DateTime GetArrivalDate(DateTime date, TimeSpan duration, LocationModel sourceLocation, LocationModel targetLocation)
+        {
+            // NOTE: Конвертацию времени в рамках тестового задания не делаю. Требует доп. времени.
+            return date.Add(duration);
         }
     }
 }

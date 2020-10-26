@@ -7,7 +7,7 @@ namespace AirAstana.Flights.Domain.Entities
     /// <summary>
     ///     The location entity.
     /// </summary>
-    public sealed class LocationEntity : EntityBase
+    public class LocationEntity : EntityBase
     {
         /// <summary>
         ///     Gets or sets the country.
@@ -42,5 +42,15 @@ namespace AirAstana.Flights.Domain.Entities
             get => LocationTimeZone.Id;
             set => LocationTimeZone = TimeZoneInfo.FindSystemTimeZoneById(value);
         }
+
+        /// <summary>
+        ///     Gets or sets the source flights.
+        /// </summary>
+        public virtual ICollection<FlightEntity> SourceFlights { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the destination flights.
+        /// </summary>
+        public virtual ICollection<FlightEntity> DestinationFlights { get; set; }
     }
 }

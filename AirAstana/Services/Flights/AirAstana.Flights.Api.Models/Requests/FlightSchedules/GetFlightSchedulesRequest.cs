@@ -15,9 +15,10 @@ namespace AirAstana.Flights.Api.Models.Requests.FlightSchedules
         ///     Конец периода.
         /// </summary>
         public DateTime? ToDate { get; set; }
+
         /// <summary>
         ///     Сортировка по дате вылета.
         /// </summary>
-        public bool Asc { get; set; }
+        public bool Asc { get; set; } = true;
     }
 }

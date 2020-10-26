@@ -1,3 +1,4 @@
+using System.Linq;
 using AirAstana.Auth.Options;
 using AirAstana.Flights.Options;
 using AirAstana.Flights.Service.AutofacModules;
@@ -7,9 +8,12 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace AirAstana.Flights.Service.OnStartup
 {
@@ -95,7 +99,10 @@ namespace AirAstana.Flights.Service.OnStartup
         {
             services.AddSwagger(ApiVersion, AuthOptions.WebAddress);
             services.AddAuthentication(AuthOptions);
-            services.AddControllers(options => { options.Filters.Add(typeof(HttpGlobalExceptionFilter)); });
+            services.AddControllers(options =>
+                {
+                    options.Filters.Add(typeof(HttpGlobalExceptionFilter));
+                }).AddNewtonsoftJson();
         }
     }
 }

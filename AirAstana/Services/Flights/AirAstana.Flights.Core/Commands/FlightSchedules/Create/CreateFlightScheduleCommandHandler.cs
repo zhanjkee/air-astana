@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
-using AirAstana.Flights.Core.Interfaces.Repositories;
+using AirAstana.Flights.Core.Interfaces.UoW;
 using AirAstana.Flights.Core.Mappers;
 using MediatR;
 
@@ -10,20 +10,22 @@ namespace AirAstana.Flights.Core.Commands.FlightSchedules.Create
 {
     public sealed class CreateFlightScheduleCommandHandler : IRequestHandler<CreateFlightScheduleCommand, CreateFlightScheduleResponse>
     {
-        private readonly IFlightRepository _flightRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CreateFlightScheduleCommandHandler([NotNull] IFlightRepository flightRepository)
+        public CreateFlightScheduleCommandHandler([NotNull] IUnitOfWork unitOfWork)
         {
-            _flightRepository = flightRepository ?? throw new ArgumentNullException(nameof(flightRepository));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
         public async Task<CreateFlightScheduleResponse> Handle(CreateFlightScheduleCommand request, CancellationToken cancellationToken)
         {
-            var flight = await _flightRepository.GetByIdAsync(request.FlightId);
-            if (flight == null) return Result(false, $"The flight does not exists by id: {request.FlightId}");
-            
-            await _flightRepository.AddScheduleAsync(flight, request.FlightSchedule.ToEntity(), cancellationToken);
-            await _flightRepository.SaveChangesAsync(cancellationToken);
+            var flightRepository = _unitOfWork.FlightRepository;
+            var flight = await flightRepository.GetByIdAsync(request.FlightSchedule.FlightId);
+            if (flight == null) return Result(false, $"The flight does not exists by id: {request.FlightSchedule.FlightId}");
+
+            var flightScheduleRepository = _unitOfWork.FlightScheduleRepository;
+            await flightScheduleRepository.InsertAsync(request.FlightSchedule.ToEntity(), cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return Result(true);
         }

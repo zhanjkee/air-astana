@@ -21,6 +21,7 @@ namespace AirAstana.Flights.Data.SqlServer
             if (string.IsNullOrEmpty(_connectionString)) throw new Exception($"Connection string is null or empty.");
 
             var optionsBuilder = new DbContextOptionsBuilder<SqlServerDbContext>()
+                .UseLazyLoadingProxies()
                 .UseSqlServer(_connectionString);
 
             var context = new SqlServerDbContext(optionsBuilder.Options);

@@ -91,7 +91,7 @@ namespace AirAstana.Flights.Data.Extensions
         {
             var start = FindPreviousSunday();
             var flightSchedules = new List<FlightScheduleEntity>();
-            for (var i = 0; i < 26; i++)
+            for (var i = 0; i < 2; i++)
             {
                 foreach (var weeklyDay in weeklyDays)
                 {

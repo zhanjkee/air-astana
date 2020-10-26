@@ -6,7 +6,7 @@ namespace AirAstana.Flights.Domain.Entities
     /// <summary>
     ///     The flight schedule entity.
     /// </summary>
-    public sealed class FlightScheduleEntity : EntityBase
+    public class FlightScheduleEntity : EntityBase
     {
         /// <summary>
         ///     Gets or sets the departure.
@@ -36,7 +36,7 @@ namespace AirAstana.Flights.Domain.Entities
         /// <summary>
         ///     Gets or sets the flight.
         /// </summary>
-        public FlightEntity Flight { get; set; }
+        public virtual FlightEntity Flight { get; set; }
 
         /// <summary>
         ///     Adds the delay time.

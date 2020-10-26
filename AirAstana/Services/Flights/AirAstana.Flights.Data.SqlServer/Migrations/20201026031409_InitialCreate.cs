@@ -39,8 +39,8 @@ namespace AirAstana.Flights.Data.SqlServer.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true),
                     FlightNumber = table.Column<string>(nullable: true),
-                    SourceId = table.Column<int>(nullable: true),
-                    DestinationId = table.Column<int>(nullable: true)
+                    SourceId = table.Column<int>(nullable: false),
+                    DestinationId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

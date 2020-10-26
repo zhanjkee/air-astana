@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AirAstana.Flights.Core.Interfaces.Repositories;
+using AirAstana.Flights.Core.Interfaces.UoW;
 using JetBrains.Annotations;
 using MediatR;
 
@@ -9,19 +9,21 @@ namespace AirAstana.Flights.Core.Commands.Locations.Delete
 {
     public sealed class DeleteLocationCommandHandler : IRequestHandler<DeleteLocationCommand, DeleteLocationResponse>
     {
-        private readonly ILocationRepository _locationRepository;
-        public DeleteLocationCommandHandler([NotNull]ILocationRepository locationRepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public DeleteLocationCommandHandler([NotNull] IUnitOfWork unitOfWork)
         {
-            _locationRepository = locationRepository ?? throw new ArgumentNullException(nameof(locationRepository));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
         public async Task<DeleteLocationResponse> Handle(DeleteLocationCommand request, CancellationToken cancellationToken)
         {
-            var location = await _locationRepository.GetByIdAsync(request.LocationId);
+            var locationRepository = _unitOfWork.LocationRepository;
+            var location = await locationRepository.GetByIdAsync(request.LocationId);
             if (location == null) return Result(false, $"Location does not exists by id: {request.LocationId}");
 
-            _locationRepository.Delete(location);
-            await _locationRepository.SaveChangesAsync(cancellationToken);
+            locationRepository.Delete(location);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return Result(true);
         }
