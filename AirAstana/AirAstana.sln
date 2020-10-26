@@ -71,6 +71,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Flights.Service",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{C4E319C5-C013-493A-9150-A604C64D9AAC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Flights.Api.Client", "Services\Flights\AirAstana.Flights.Api.Client\AirAstana.Flights.Api.Client.csproj", "{705A0887-09EB-4DC3-A344-132605C69F91}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirAstana.Flights.Api.Client.Http", "Services\Flights\AirAstana.Flights.Api.Client.Http\AirAstana.Flights.Api.Client.Http.csproj", "{35ECB25E-9979-4BFD-84A5-0622D3AA5765}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -161,6 +165,14 @@ Global
 		{9052CD9D-EB32-470E-8907-F05AC9A4DF7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9052CD9D-EB32-470E-8907-F05AC9A4DF7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9052CD9D-EB32-470E-8907-F05AC9A4DF7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{705A0887-09EB-4DC3-A344-132605C69F91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{705A0887-09EB-4DC3-A344-132605C69F91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{705A0887-09EB-4DC3-A344-132605C69F91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{705A0887-09EB-4DC3-A344-132605C69F91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35ECB25E-9979-4BFD-84A5-0622D3AA5765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35ECB25E-9979-4BFD-84A5-0622D3AA5765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35ECB25E-9979-4BFD-84A5-0622D3AA5765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35ECB25E-9979-4BFD-84A5-0622D3AA5765}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -198,6 +210,8 @@ Global
 		{208B9086-2B80-4F24-BF42-00DDE189BD30} = {28769D42-D00F-4975-8541-28E9656775B9}
 		{9052CD9D-EB32-470E-8907-F05AC9A4DF7A} = {232830AD-701C-42F4-9EA5-D4F311F78E94}
 		{C4E319C5-C013-493A-9150-A604C64D9AAC} = {232830AD-701C-42F4-9EA5-D4F311F78E94}
+		{705A0887-09EB-4DC3-A344-132605C69F91} = {C4E319C5-C013-493A-9150-A604C64D9AAC}
+		{35ECB25E-9979-4BFD-84A5-0622D3AA5765} = {C4E319C5-C013-493A-9150-A604C64D9AAC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D273FF58-B7B8-4208-BD66-79BF76404633}
